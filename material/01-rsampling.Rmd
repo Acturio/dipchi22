@@ -1,6 +1,12 @@
 # Programación estadística en R
 
-```{r}
+
+## Carga de librerías y datos
+
+El primer paso para realizar una muestra en *R* es cargar las librerías necesarias de trabajo y el/los conjuntos de datos que servirán como marco de muestreo.
+
+**Librerías**
+```{r, warning=FALSE, message=F}
 library(foreign)
 library(tidyverse)
 library(dplyr) 
@@ -8,12 +14,31 @@ library(tidyr)
 library(naniar)
 library(sampling)
 library(stringr)
+```
 
-mzn_viv <- read.dbf("data/cpv2010_manzanas_viviendas.dbf") 
+**Carga de datos**
+
+```{r}
+mzn_viv <- read.dbf("data/cpv2010_manzanas_viviendas.dbf")
+
+head(mzn_viv)
+```
+
+
+```{r}
 mzn_pob <- read.dbf("data/manzanas.dbf")
 
-# Marco de muestreo 
+head(mzn_pob)
+```
 
+
+## Marco de muestreo
+
+El marco de muestreo es el conjunto de datos que contiene a todos los elementos elegiblres en la muestra de acuerdo con la población objetiva definida por el investigador.
+
+**Creación de marco de muestreo**
+
+```{r}
 marco <- mzn_viv %>% 
   as_tibble() %>% 
   dplyr::select(CVEGEO, VIV2) %>% 
@@ -22,6 +47,24 @@ marco <- mzn_viv %>%
   dplyr::select(ID_unit, CVEGEO, VIV2, POB21, POB52, POB77) %>% 
   naniar::replace_with_na_if(.predicate = is.numeric, condition = ~.x < 0)
 
+head(marco)
+```
+
+
+## Métodos de muestreo
+
+Existen diferentes formas de realizar una muestra. Algunas de las más simples se presentan a continuación:
+
+* Muestreo aleatorio simple con reemplazo
+* Muestreo aleatorio simple sin reemplazo
+* Muestreo aleatorio sistemático
+* Muestreo estratificado con afijación simple
+* Muestreo estratificado con afijación proporcional
+
+### Muestreo aleatorio simple sin/con remplazo
+**Métodos de muestreo**
+
+```{r}
 # srswor MAS sin remplazo
 # srswr MAS con remplazo
 # systematic proporcional al tama?o
@@ -35,11 +78,15 @@ muestra <- sampling::strata(
   description = TRUE
   )
 
-#fe_mzn: factor de expansion
+# factor de expansion
 muestra_ponde <- getdata(marco, muestra) %>% 
   mutate(fe_mzn = 1/Prob)
 
-#Estimación del numero de viviendas con base en una muestra de 20 manzanas
+head(muestra_ponde)
+```
+
+**Estimación del numero de viviendas con base en una muestra de 20 manzanas**
+```{r}
 muestra_ponde %>% 
   summarise(
     Total = sum(fe_mzn), 
@@ -56,13 +103,16 @@ marco %>%
 
 #error relativo viviendas
 dif = (2378763 - 2260794) / 2378763
+dif
 
 #error relativo poblacion
 dif2 = (6640095 - 6634328) / 6640095
+dif2
+```
 
+### Muestreo con probabilidades desiguales
 
-#####################
-
+```{r}
 # "systematic" probabilidades desiguales 
 
 muestra2 <- sampling::strata(
@@ -74,15 +124,16 @@ muestra2 <- sampling::strata(
   description = TRUE
   )
 
-#fe_mzn: factor de expansion
+
 muestra_ponde <- marco %>% 
   filter(ID_unit %in% muestra2$ID_unit) %>% 
   left_join(muestra2, by = "ID_unit") %>% 
-  mutate(fe_mzn = 1/Prob)
+  mutate(fe_mzn = 1/Prob) #fe_mzn: factor de expansion
+```
 
+## Muestreo estratificado
 
-############################################################
-
+```{r}
 # Variable de estratificación: por alcaldía 
 
 marco_estratificado <- marco %>% mutate(alcaldia = str_sub(CVEGEO,3,5) ) 
@@ -96,7 +147,11 @@ diccionario_estratos <- marco_estratificado %>%
 marco_estratificado <- marco_estratificado %>% 
   left_join(diccionario_estratos, by = "alcaldia") %>%
   arrange(id_estrato)
+```
 
+### Muestreo estratificado con afijación simple
+
+```{r}
 # Estratificado PPT (probabilidad proporcional al tamaño) con afijación simple (mismo tamaño de muestra)
 muestra_estratificada <- sampling::strata(
   marco_estratificado, 
@@ -132,39 +187,6 @@ muestra_estratificada_prob_ppt <- marco_estratificado %>%
 
 muestra_estratificada_prob_ppt
 
-################################################################################
-
-head(marco_estratificado)
-
-marco_estratificado_pik <- marco_estratificado %>% 
-  left_join(select(afijacion_proporcional, id_estrato, n_h), by = "id_estrato") %>% 
-  mutate(pik = inclusionprobastrata(id_estrato,afijacion_proporcional %>% pull(n_h))) %>% 
-  group_by(id_estrato) %>% 
-  mutate(pik_2 = VIV2 / sum(VIV2)*n_h)
-
-marco_estratificado_pik
-
-#Corroborar pik_2
-marco_estratificado_pik %>% 
-  group_by(id_estrato) %>% 
-  summarise(viv2 = sum(VIV2))
-
-# group_split 
-marco_estratificado_pik %>% 
-  group_split(id_estrato)
-
-#Muestra con base a la afijación proporcional 
-muestra_estratificada_pik <- sampling::strata(
-  marco_estratificado_pik,
-  stratanames = "id_estrato",
-  size = afijacion_proporcional %>% pull(n_h),
-  method = "systematic", 
-  pik = marco_estratificado_pik$pik, description = TRUE
-  )
-
-muestra_estratificada_pik
-
 ```
-
 
 
