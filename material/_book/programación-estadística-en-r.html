@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 2 Programación estadística en R | Análisis Estadístico: Muestreo</title>
+  <meta name="description" content="Clases Muestreo" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 2 Programación estadística en R | Análisis Estadístico: Muestreo" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Clases Muestreo" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 2 Programación estadística en R | Análisis Estadístico: Muestreo" />
+  
+  <meta name="twitter:description" content="Clases Muestreo" />
+  
+
+<meta name="author" content="Oscar Arturo Bringas López" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"><img src="img/logo_unam.png" width="240"></a></li|
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Muestreo</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#qué-es-y-para-qué-sirve-muestreo"><i class="fa fa-check"></i><b>1.1</b> ¿Qué es y para qué sirve muestreo?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#ventajas-e-importancia-de-utilizar-muestreo-en-el-mundo-corporativo"><i class="fa fa-check"></i><b>1.2</b> Ventajas e importancia de utilizar muestreo en el mundo corporativo</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#qué-se-requiere-para-formular-un-problema-de-muestreo"><i class="fa fa-check"></i><b>1.3</b> ¿Qué se requiere para formular un problema de muestreo?</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#tipos-de-muestreo"><i class="fa fa-check"></i><b>1.4</b> Tipos de muestreo</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="index.html"><a href="index.html#muestreo-no-probabilístico"><i class="fa fa-check"></i><b>1.4.1</b> Muestreo no probabilístico</a></li>
+<li class="chapter" data-level="1.4.2" data-path="index.html"><a href="index.html#muestreo-probabilístico"><i class="fa fa-check"></i><b>1.4.2</b> Muestreo probabilístico</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#diferentes-formas-de-hacer-muestreo"><i class="fa fa-check"></i><b>1.5</b> Diferentes formas de hacer muestreo</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="index.html"><a href="index.html#tipos-de-encuestas-según-la-forma-de-aplicación"><i class="fa fa-check"></i><b>1.5.1</b> Tipos de encuestas según la forma de aplicación</a></li>
+<li class="chapter" data-level="1.5.2" data-path="index.html"><a href="index.html#tipos-de-encuestas-según-sus-objetivos"><i class="fa fa-check"></i><b>1.5.2</b> Tipos de encuestas según sus objetivos</a></li>
+<li class="chapter" data-level="1.5.3" data-path="index.html"><a href="index.html#tipos-de-encuestas-según-las-preguntas"><i class="fa fa-check"></i><b>1.5.3</b> Tipos de encuestas según las preguntas</a></li>
+<li class="chapter" data-level="1.5.4" data-path="index.html"><a href="index.html#ciclo-de-vida-de-una-encuesta"><i class="fa fa-check"></i><b>1.5.4</b> Ciclo de vida de una encuesta</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#relación-entre-muestreo-y-machine-learning"><i class="fa fa-check"></i><b>1.6</b> Relación entre muestreo y machine learning</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="programación-estadística-en-r.html"><a href="programación-estadística-en-r.html"><i class="fa fa-check"></i><b>2</b> Programación estadística en R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="programación-estadística-en-r.html"><a href="programación-estadística-en-r.html#carga-de-librerías-y-datos"><i class="fa fa-check"></i><b>2.1</b> Carga de librerías y datos</a></li>
+<li class="chapter" data-level="2.2" data-path="programación-estadística-en-r.html"><a href="programación-estadística-en-r.html#marco-de-muestreo"><i class="fa fa-check"></i><b>2.2</b> Marco de muestreo</a></li>
+<li class="chapter" data-level="2.3" data-path="programación-estadística-en-r.html"><a href="programación-estadística-en-r.html#métodos-de-muestreo"><i class="fa fa-check"></i><b>2.3</b> Métodos de muestreo</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="programación-estadística-en-r.html"><a href="programación-estadística-en-r.html#muestreo-aleatorio-simple-sincon-remplazo"><i class="fa fa-check"></i><b>2.3.1</b> Muestreo aleatorio simple sin/con remplazo</a></li>
+<li class="chapter" data-level="2.3.2" data-path="programación-estadística-en-r.html"><a href="programación-estadística-en-r.html#muestreo-con-probabilidades-desiguales"><i class="fa fa-check"></i><b>2.3.2</b> Muestreo con probabilidades desiguales</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="programación-estadística-en-r.html"><a href="programación-estadística-en-r.html#muestreo-estratificado"><i class="fa fa-check"></i><b>2.4</b> Muestreo estratificado</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="programación-estadística-en-r.html"><a href="programación-estadística-en-r.html#muestreo-estratificado-con-afijación-simple"><i class="fa fa-check"></i><b>2.4.1</b> Muestreo estratificado con afijación simple</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis Estadístico: Muestreo</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="programación-estadística-en-r" class="section level1" number="2">
+<h1><span class="header-section-number">Capítulo 2</span> Programación estadística en R</h1>
+<div id="carga-de-librerías-y-datos" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Carga de librerías y datos</h2>
+<p>El primer paso para realizar una muestra en <em>R</em> es cargar las librerías necesarias de trabajo y el/los conjuntos de datos que servirán como marco de muestreo.</p>
+<p><strong>Librerías</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="programación-estadística-en-r.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreign)</span>
+<span id="cb1-2"><a href="programación-estadística-en-r.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="programación-estadística-en-r.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) </span>
+<span id="cb1-4"><a href="programación-estadística-en-r.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr) </span>
+<span id="cb1-5"><a href="programación-estadística-en-r.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb1-6"><a href="programación-estadística-en-r.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sampling)</span>
+<span id="cb1-7"><a href="programación-estadística-en-r.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span></code></pre></div>
+<p><strong>Carga de datos</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="programación-estadística-en-r.html#cb2-1" aria-hidden="true" tabindex="-1"></a>mzn_viv <span class="ot">&lt;-</span> <span class="fu">read.dbf</span>(<span class="st">&quot;data/cpv2010_manzanas_viviendas.dbf&quot;</span>)</span>
+<span id="cb2-2"><a href="programación-estadística-en-r.html#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="programación-estadística-en-r.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mzn_viv)</span></code></pre></div>
+<pre><code>##             CVEGEO VIV0 VIV1 VIV2 VIV2_R VIV3 VIV3_R VIV4_R VIV5_R VIV6 VIV6_R
+## 1 0900200010010001   48   48   47   97.9  199   98.5    4.2    0.9    0      0
+## 2 0900200010010002   45   44   41   93.2  149   94.3    3.6    0.9   -6     -6
+## 3 0900200010010003   33   32   30   93.8  130   95.6    4.3    0.9    0      0
+## 4 0900200010010004   42   42   40   95.2  161   96.4    4.0    0.9    0      0
+## 5 0900200010010005   43   41   38   92.7  142   94.0    3.7    0.8    0      0
+## 6 0900200010010006   42   39   39  100.0  156  100.0    4.0    0.8    0      0
+##   VIV7 VIV7_R VIV8 VIV8_R VIV9 VIV9_R VIV10 VIV10_R VIV11 VIV11_R VIV12 VIV12_R
+## 1    5   10.6   41   87.2   -6   -6.0     0       0    -6      -6    44    93.6
+## 2   -6   -6.0   39   95.1    4    9.8     0       0    -6      -6    39    95.1
+## 3    3   10.0   27   90.0    4   13.3     0       0     0       0    30   100.0
+## 4    4   10.0   36   90.0   -6   -6.0     0       0     4      10    36    90.0
+## 5    5   13.2   33   86.8   -6   -6.0     0       0    -6      -6    36    94.7
+## 6   -6   -6.0   38   97.4   -6   -6.0     0       0    -6      -6    37    94.9
+##   VIV13 VIV13_R VIV14 VIV14_R VIV15 VIV15_R VIV16 VIV16_R VIV17 VIV17_R VIV18
+## 1     0       0    46    97.9     0       0    46    97.9     0       0   196
+## 2     0       0    40    97.6     0       0    40    97.6     0       0   148
+## 3     0       0    30   100.0     0       0    30   100.0     0       0   130
+## 4     0       0    40   100.0     0       0    40   100.0     0       0   161
+## 5     0       0    38   100.0     0       0    38   100.0     0       0   142
+## 6     0       0    39   100.0     0       0    39   100.0     0       0   156
+##   VIV18_R VIV19 VIV19_R VIV20 VIV20_R VIV21 VIV21_R VIV22 VIV22_R VIV23 VIV23_R
+## 1    98.5    46    97.9     0       0   196    98.5    46    97.9     0       0
+## 2    99.3    40    97.6     0       0   148    99.3    40    97.6     0       0
+## 3   100.0    30   100.0     0       0   126    96.9    30   100.0     0       0
+## 4   100.0    40   100.0     0       0   161   100.0    40   100.0     0       0
+## 5   100.0    38   100.0     0       0   142   100.0    38   100.0     0       0
+## 6   100.0    39   100.0     0       0   156   100.0    39   100.0     0       0
+##   VIV24 VIV24_R VIV25 VIV25_R VIV26 VIV26_R VIV27 VIV27_R VIV28 VIV28_R VIV29
+## 1    46    97.9     0       0    46    97.9    45    95.7    28    59.6     0
+## 2    40    97.6     0       0    40    97.6    39    95.1    19    46.3     0
+## 3    30   100.0     0       0    30   100.0    28    93.3    12    40.0     0
+## 4    40   100.0     0       0    39    97.5    34    85.0    22    55.0    -6
+## 5    38   100.0     0       0    38   100.0    38   100.0    24    63.2     0
+## 6    39   100.0     0       0    39   100.0    36    92.3    27    69.2     0
+##   VIV29_R VIV30 VIV30_R VIV31 VIV31_R VIV32 VIV32_R VIV33 VIV33_R VIV34 VIV34_R
+## 1       0     0       0    43    91.5    46    97.9    21    44.7    45    95.7
+## 2       0     0       0    37    90.2    40    97.6    25    61.0    37    90.2
+## 3       0     0       0    28    93.3    30   100.0    15    50.0    29    96.7
+## 4      -6    -6      -6    39    97.5    40   100.0    22    55.0    38    95.0
+## 5       0     0       0    38   100.0    38   100.0    20    52.6    37    97.4
+## 6       0     0       0    38    97.4    39   100.0    20    51.3    36    92.3
+##   VIV35 VIV35_R VIV36 VIV36_R VIV37 VIV37_R VIV38 VIV38_R VIV39 VIV39_R VIV40
+## 1    26    55.3    15    31.9     0       0     0       0    25    53.2     0
+## 2    31    75.6    21    51.2     0       0    -6      -6    15    36.6     0
+## 3    22    73.3    12    40.0     0       0     0       0    15    50.0     0
+## 4    33    82.5    18    45.0     0       0     0       0    18    45.0     0
+## 5    32    84.2    15    39.5     0       0     0       0    18    47.4     0
+## 6    31    79.5    15    38.5     0       0     0       0    19    48.7     0
+##   VIV40_R VIV41 VIV41_R
+## 1       0     0       0
+## 2       0     0       0
+## 3       0     0       0
+## 4       0     0       0
+## 5       0     0       0
+## 6       0     0       0</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="programación-estadística-en-r.html#cb4-1" aria-hidden="true" tabindex="-1"></a>mzn_pob <span class="ot">&lt;-</span> <span class="fu">read.dbf</span>(<span class="st">&quot;data/manzanas.dbf&quot;</span>)</span>
+<span id="cb4-2"><a href="programación-estadística-en-r.html#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="programación-estadística-en-r.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mzn_pob)</span></code></pre></div>
+<pre><code>##             CVEGEO POB1 POB2 POB2_R POB3 POB3_R POB4 POB4_R POB5 POB5_R POB6
+## 1 0900200010542046    1   -6   -6.0   -6   -6.0   -6   -6.0   -6   -6.0   -6
+## 2 0900200010542047    0    0   -8.0    0   -8.0    0   -8.0    0   -8.0    0
+## 3 0900200010542048   17    0    0.0   -6   -6.0   -6   -6.0    0    0.0    0
+## 4 0900200010542050    4   -6   -6.0   -6   -6.0   -6   -6.0   -6   -6.0   -6
+## 5 0900200010542049    0    0   -8.0    0   -8.0    0   -8.0    0   -8.0    0
+## 6 0900200010330001  435   15    3.4   19    4.4   10    2.3   29    6.7   39
+##   POB6_R POB7 POB7_R POB8 POB8_R POB9 POB9_R POB10 POB10_R POB11 POB11_R POB12
+## 1     -6   -6   -6.0   -6   -6.0   -6   -6.0    -6    -6.0    -6    -6.0    -6
+## 2     -8    0   -8.0    0   -8.0    0   -8.0     0    -8.0     0    -8.0     0
+## 3      0    0    0.0   -6   -6.0    0    0.0     6    35.3     7    41.2    15
+## 4     -6   -6   -6.0   -6   -6.0   -6   -6.0    -6    -6.0    -6    -6.0    -6
+## 5     -8    0   -8.0    0   -8.0    0   -8.0     0    -8.0     0    -8.0     0
+## 6      9   16    3.7   70   16.1   22    5.1    80    18.4   118    27.1   325
+##   POB12_R POB13 POB13_R POB14 POB14_R POB15 POB15_R POB16 POB16_R POB17 POB17_R
+## 1    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0
+## 2    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0
+## 3    88.2     6    35.3     4    23.5     4    23.5     0     0.0    17   100.0
+## 4    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0
+## 5    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0
+## 6    74.7    58    13.3   135    31.0    50    11.5    22     5.1   417    95.9
+##   POB18 POB18_R POB19 POB19_R POB20 POB20_R POB21 POB21_R POB22 POB22_R POB23
+## 1    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6
+## 2     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0
+## 3    16    94.1    15    88.2    15    88.2    15    88.2     9    52.9     0
+## 4    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6
+## 5     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0
+## 6   413    94.9   378    86.9   362    83.2   340    78.2   282    64.8    59
+##   POB23_R POB24 POB24_R POB25 POB25_R POB26_R POB27_R POB28_R POB29_R POB30_R
+## 1    -6.0    -6    -6.0    -6    -6.0    -6.0    -6.0    -6.0    -6.0      -6
+## 2    -8.0     0    -8.0     0    -8.0    -8.0    -8.0    -8.0    -8.0      -8
+## 3     0.0     0     0.0     0     0.0   142.9    13.3    13.3     0.0      27
+## 4    -6.0    -6    -6.0    -6    -6.0    -6.0    -6.0    -6.0    -6.0      -6
+## 5    -8.0     0    -8.0     0    -8.0    -8.0    -8.0    -8.0    -8.0      -8
+## 6    13.6    37     8.5    22     5.1    88.3    32.9    21.5    11.4      33
+##   POB31 POB31_R POB32 POB32_R POB33 POB33_R POB34 POB34_R POB35 POB35_R POB36
+## 1    -6    -6.0    -6      -6    -6    -6.0    -6    -6.0    -6    -6.0    -6
+## 2     0    -8.0     0      -8     0    -8.0     0    -8.0     0    -8.0     0
+## 3     7    41.2     0       0    -6    -6.0    -6    -6.0     0     0.0     0
+## 4    -6    -6.0    -6      -6    -6    -6.0    -6    -6.0    -6    -6.0    -6
+## 5     0    -8.0     0      -8     0    -8.0     0    -8.0     0    -8.0     0
+## 6   231    53.1     7       3     8     3.5     3     1.3    16     6.9    20
+##   POB36_R POB37 POB37_R POB38 POB38_R POB39 POB39_R POB40 POB40_R POB41 POB41_R
+## 1    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0
+## 2    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0
+## 3     0.0     0     0.0    -6    -6.0     0     0.0     3    42.9     3    42.9
+## 4    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0
+## 5    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0
+## 6     8.7     8     3.5    34    14.7    15     6.5    40    17.3    57    24.7
+##   POB42 POB42_R POB43 POB43_R POB44 POB44_R POB45 POB45_R POB46 POB46_R POB47
+## 1    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6
+## 2     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0
+## 3     5    71.4     6    85.7     3    42.9    -6    -6.0    -6    -6.0     0
+## 4    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6
+## 5     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0
+## 6   132    57.1   172    74.5    25    10.8    75    32.5    31    13.4     9
+##   POB47_R POB48 POB48_R POB49 POB49_R POB50 POB50_R POB51 POB51_R POB52 POB52_R
+## 1    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0
+## 2    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0
+## 3     0.0     7   100.0     6    85.7     6    85.7     6    85.7     6    85.7
+## 4    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0
+## 5    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0
+## 6     3.9   222    96.1   221    95.7   203    87.9   195    84.4   180    77.9
+##   POB53 POB53_R POB54 POB54_R POB55 POB55_R POB56 POB56_R POB57 POB57_R POB58
+## 1    -6    -6.0    -6    -6.0    -6      -6    -6    -6.0    -6    -6.0    -6
+## 2     0    -8.0     0    -8.0     0      -8     0    -8.0     0    -8.0     0
+## 3     3    42.9     0     0.0     0       0     0     0.0    10    58.8     0
+## 4    -6    -6.0    -6    -6.0    -6      -6    -6    -6.0    -6    -6.0    -6
+## 5     0    -8.0     0    -8.0     0      -8     0    -8.0     0    -8.0     0
+## 6   155    67.1    32    13.9    23      10    16     6.9   204    46.9     8
+##   POB58_R POB59 POB59_R POB60 POB60_R POB61 POB61_R POB62 POB62_R POB63 POB63_R
+## 1    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0
+## 2    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0
+## 3     0.0     0     0.0    -6    -6.0     0     0.0     0     0.0     0     0.0
+## 4    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0
+## 5    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0
+## 6     3.9    11     5.4     7     3.4    13     6.4    19     9.3     8     3.9
+##   POB64 POB64_R POB65 POB65_R POB66 POB66_R POB67 POB67_R POB68 POB68_R POB69
+## 1    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6      -6    -6
+## 2     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0      -8     0
+## 3    -6    -6.0     0     0.0     3    30.0     4    40.0     9      90     3
+## 4    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6      -6    -6
+## 5     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0      -8     0
+## 6    36    17.6     7     3.4    40    19.6    61    29.9   153      75    33
+##   POB69_R POB70 POB70_R POB71 POB71_R POB72 POB72_R POB73 POB73_R POB74 POB74_R
+## 1    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0
+## 2    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0
+## 3    30.0    -6    -6.0     3    30.0     0     0.0    10   100.0    10   100.0
+## 4    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0
+## 5    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0
+## 6    16.2    60    29.4    19     9.3    13     6.4   195    95.6   192    94.1
+##   POB75 POB75_R POB76 POB76_R POB77 POB77_R POB78 POB78_R POB79 POB79_R POB80
+## 1    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6
+## 2     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0
+## 3     9    90.0     9    90.0     9    90.0     6    60.0     0     0.0     0
+## 4    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6    -6.0    -6
+## 5     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0    -8.0     0
+## 6   175    85.8   167    81.9   160    78.4   127    62.3    27    13.2    14
+##   POB80_R POB81 POB81_R OID
+## 1    -6.0    -6    -6.0   1
+## 2    -8.0     0    -8.0   2
+## 3     0.0     0     0.0   3
+## 4    -6.0    -6    -6.0   4
+## 5    -8.0     0    -8.0   5
+## 6     6.9     6     2.9   6</code></pre>
+</div>
+<div id="marco-de-muestreo" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Marco de muestreo</h2>
+<p>El marco de muestreo es el conjunto de datos que contiene a todos los elementos elegiblres en la muestra de acuerdo con la población objetiva definida por el investigador.</p>
+<p><strong>Creación de marco de muestreo</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="programación-estadística-en-r.html#cb6-1" aria-hidden="true" tabindex="-1"></a>marco <span class="ot">&lt;-</span> mzn_viv <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="programación-estadística-en-r.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb6-3"><a href="programación-estadística-en-r.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(CVEGEO, VIV2) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-4"><a href="programación-estadística-en-r.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(mzn_pob, <span class="at">by =</span> <span class="st">&quot;CVEGEO&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-5"><a href="programación-estadística-en-r.html#cb6-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">ID_unit =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(mzn_viv)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-6"><a href="programación-estadística-en-r.html#cb6-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(ID_unit, CVEGEO, VIV2, POB21, POB52, POB77) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-7"><a href="programación-estadística-en-r.html#cb6-7" aria-hidden="true" tabindex="-1"></a>  naniar<span class="sc">::</span><span class="fu">replace_with_na_if</span>(<span class="at">.predicate =</span> is.numeric, <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">&lt;</span> <span class="dv">0</span>)</span>
+<span id="cb6-8"><a href="programación-estadística-en-r.html#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="programación-estadística-en-r.html#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(marco)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 6
+##   ID_unit CVEGEO            VIV2 POB21 POB52 POB77
+##     &lt;int&gt; &lt;fct&gt;            &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+## 1       1 0900200010010001    47   157    81    76
+## 2       2 0900200010010002    41   115    66    49
+## 3       3 0900200010010003    30   103    58    45
+## 4       4 0900200010010004    40   132    70    62
+## 5       5 0900200010010005    38   121    64    57
+## 6       6 0900200010010006    39   132    79    53</code></pre>
+</div>
+<div id="métodos-de-muestreo" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Métodos de muestreo</h2>
+<p>Existen diferentes formas de realizar una muestra. Algunas de las más simples se presentan a continuación:</p>
+<ul>
+<li>Muestreo aleatorio simple con reemplazo</li>
+<li>Muestreo aleatorio simple sin reemplazo</li>
+<li>Muestreo aleatorio sistemático</li>
+<li>Muestreo estratificado con afijación simple</li>
+<li>Muestreo estratificado con afijación proporcional</li>
+</ul>
+<div id="muestreo-aleatorio-simple-sincon-remplazo" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Muestreo aleatorio simple sin/con remplazo</h3>
+<p><strong>Métodos de muestreo</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="programación-estadística-en-r.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># srswor MAS sin remplazo</span></span>
+<span id="cb8-2"><a href="programación-estadística-en-r.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># srswr MAS con remplazo</span></span>
+<span id="cb8-3"><a href="programación-estadística-en-r.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># systematic proporcional al tama?o</span></span>
+<span id="cb8-4"><a href="programación-estadística-en-r.html#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="programación-estadística-en-r.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">310308261</span>)</span>
+<span id="cb8-6"><a href="programación-estadística-en-r.html#cb8-6" aria-hidden="true" tabindex="-1"></a>muestra <span class="ot">&lt;-</span> sampling<span class="sc">::</span><span class="fu">strata</span>(</span>
+<span id="cb8-7"><a href="programación-estadística-en-r.html#cb8-7" aria-hidden="true" tabindex="-1"></a>  marco, </span>
+<span id="cb8-8"><a href="programación-estadística-en-r.html#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">stratanames =</span> <span class="cn">NULL</span>, </span>
+<span id="cb8-9"><a href="programación-estadística-en-r.html#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">20</span>, </span>
+<span id="cb8-10"><a href="programación-estadística-en-r.html#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;srswor&quot;</span>, </span>
+<span id="cb8-11"><a href="programación-estadística-en-r.html#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="cn">TRUE</span></span>
+<span id="cb8-12"><a href="programación-estadística-en-r.html#cb8-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## 
+## Population total and number of selected units: 63239 20</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="programación-estadística-en-r.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># factor de expansion</span></span>
+<span id="cb10-2"><a href="programación-estadística-en-r.html#cb10-2" aria-hidden="true" tabindex="-1"></a>muestra_ponde <span class="ot">&lt;-</span> <span class="fu">getdata</span>(marco, muestra) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="programación-estadística-en-r.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fe_mzn =</span> <span class="dv">1</span><span class="sc">/</span>Prob)</span>
+<span id="cb10-4"><a href="programación-estadística-en-r.html#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="programación-estadística-en-r.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(muestra_ponde)</span></code></pre></div>
+<pre><code>##             CVEGEO VIV2 POB21 POB52 POB77 ID_unit         Prob  fe_mzn
+## 1 0900200010487009   44   125    64    61    1152 0.0003162605 3161.95
+## 2 0900200010932006   10    28    13    15    2289 0.0003162605 3161.95
+## 3 0900300010978011   68   195    94   101    5298 0.0003162605 3161.95
+## 4 0900300011590030   19    45    24    21    7126 0.0003162605 3161.95
+## 5 0900500010296028    0     0     0     0    9384 0.0003162605 3161.95
+## 6 0900500010402001   83   208   107   101    9713 0.0003162605 3161.95</code></pre>
+<p><strong>Estimación del numero de viviendas con base en una muestra de 20 manzanas</strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="programación-estadística-en-r.html#cb12-1" aria-hidden="true" tabindex="-1"></a>muestra_ponde <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="programación-estadística-en-r.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb12-3"><a href="programación-estadística-en-r.html#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Total =</span> <span class="fu">sum</span>(fe_mzn), </span>
+<span id="cb12-4"><a href="programación-estadística-en-r.html#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">pob_total =</span> <span class="fu">sum</span>(fe_mzn<span class="sc">*</span>POB21),</span>
+<span id="cb12-5"><a href="programación-estadística-en-r.html#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">viviendas =</span> <span class="fu">sum</span>(fe_mzn <span class="sc">*</span> VIV2)</span>
+<span id="cb12-6"><a href="programación-estadística-en-r.html#cb12-6" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<pre><code>##   Total pob_total viviendas
+## 1 63239   6839298   2687658</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="programación-estadística-en-r.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># valores reales</span></span>
+<span id="cb14-2"><a href="programación-estadística-en-r.html#cb14-2" aria-hidden="true" tabindex="-1"></a>marco <span class="sc">%&gt;%</span> </span>
+<span id="cb14-3"><a href="programación-estadística-en-r.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb14-4"><a href="programación-estadística-en-r.html#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">viviendas =</span> <span class="fu">sum</span>(VIV2),</span>
+<span id="cb14-5"><a href="programación-estadística-en-r.html#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">pob_total =</span> <span class="fu">sum</span>(POB21, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-6"><a href="programación-estadística-en-r.html#cb14-6" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 2
+##   viviendas pob_total
+##       &lt;int&gt;     &lt;int&gt;
+## 1   2378763   6212042</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="programación-estadística-en-r.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#error relativo viviendas</span></span>
+<span id="cb16-2"><a href="programación-estadística-en-r.html#cb16-2" aria-hidden="true" tabindex="-1"></a>dif <span class="ot">=</span> (<span class="dv">2378763</span> <span class="sc">-</span> <span class="dv">2260794</span>) <span class="sc">/</span> <span class="dv">2378763</span></span>
+<span id="cb16-3"><a href="programación-estadística-en-r.html#cb16-3" aria-hidden="true" tabindex="-1"></a>dif</span></code></pre></div>
+<pre><code>## [1] 0.04959258</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="programación-estadística-en-r.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#error relativo poblacion</span></span>
+<span id="cb18-2"><a href="programación-estadística-en-r.html#cb18-2" aria-hidden="true" tabindex="-1"></a>dif2 <span class="ot">=</span> (<span class="dv">6640095</span> <span class="sc">-</span> <span class="dv">6634328</span>) <span class="sc">/</span> <span class="dv">6640095</span></span>
+<span id="cb18-3"><a href="programación-estadística-en-r.html#cb18-3" aria-hidden="true" tabindex="-1"></a>dif2</span></code></pre></div>
+<pre><code>## [1] 0.0008685117</code></pre>
+</div>
+<div id="muestreo-con-probabilidades-desiguales" class="section level3" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Muestreo con probabilidades desiguales</h3>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="programación-estadística-en-r.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;systematic&quot; probabilidades desiguales </span></span>
+<span id="cb20-2"><a href="programación-estadística-en-r.html#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="programación-estadística-en-r.html#cb20-3" aria-hidden="true" tabindex="-1"></a>muestra2 <span class="ot">&lt;-</span> sampling<span class="sc">::</span><span class="fu">strata</span>(</span>
+<span id="cb20-4"><a href="programación-estadística-en-r.html#cb20-4" aria-hidden="true" tabindex="-1"></a>  marco, </span>
+<span id="cb20-5"><a href="programación-estadística-en-r.html#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">stratanames =</span> <span class="cn">NULL</span>, </span>
+<span id="cb20-6"><a href="programación-estadística-en-r.html#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">20</span>,</span>
+<span id="cb20-7"><a href="programación-estadística-en-r.html#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;systematic&quot;</span>, </span>
+<span id="cb20-8"><a href="programación-estadística-en-r.html#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">pik =</span> marco<span class="sc">$</span>VIV2, </span>
+<span id="cb20-9"><a href="programación-estadística-en-r.html#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="cn">TRUE</span></span>
+<span id="cb20-10"><a href="programación-estadística-en-r.html#cb20-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## Warning in inclusionprobabilities(pik, size): there are zero values in the initial vector a</code></pre>
+<pre><code>## 
+## Population total and number of selected units: 63239 20</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="programación-estadística-en-r.html#cb23-1" aria-hidden="true" tabindex="-1"></a>muestra_ponde <span class="ot">&lt;-</span> marco <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href="programación-estadística-en-r.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ID_unit <span class="sc">%in%</span> muestra2<span class="sc">$</span>ID_unit) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-3"><a href="programación-estadística-en-r.html#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(muestra2, <span class="at">by =</span> <span class="st">&quot;ID_unit&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-4"><a href="programación-estadística-en-r.html#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fe_mzn =</span> <span class="dv">1</span><span class="sc">/</span>Prob) <span class="co">#fe_mzn: factor de expansion</span></span></code></pre></div>
+</div>
+</div>
+<div id="muestreo-estratificado" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Muestreo estratificado</h2>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="programación-estadística-en-r.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable de estratificación: por alcaldía </span></span>
+<span id="cb24-2"><a href="programación-estadística-en-r.html#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="programación-estadística-en-r.html#cb24-3" aria-hidden="true" tabindex="-1"></a>marco_estratificado <span class="ot">&lt;-</span> marco <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">alcaldia =</span> <span class="fu">str_sub</span>(CVEGEO,<span class="dv">3</span>,<span class="dv">5</span>) ) </span>
+<span id="cb24-4"><a href="programación-estadística-en-r.html#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="programación-estadística-en-r.html#cb24-5" aria-hidden="true" tabindex="-1"></a>diccionario_estratos <span class="ot">&lt;-</span> marco_estratificado <span class="sc">%&gt;%</span></span>
+<span id="cb24-6"><a href="programación-estadística-en-r.html#cb24-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(alcaldia) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-7"><a href="programación-estadística-en-r.html#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb24-8"><a href="programación-estadística-en-r.html#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id_estrato =</span> <span class="fu">row_number</span>())</span>
+<span id="cb24-9"><a href="programación-estadística-en-r.html#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="programación-estadística-en-r.html#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="programación-estadística-en-r.html#cb24-11" aria-hidden="true" tabindex="-1"></a>marco_estratificado <span class="ot">&lt;-</span> marco_estratificado <span class="sc">%&gt;%</span> </span>
+<span id="cb24-12"><a href="programación-estadística-en-r.html#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(diccionario_estratos, <span class="at">by =</span> <span class="st">&quot;alcaldia&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-13"><a href="programación-estadística-en-r.html#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(id_estrato)</span></code></pre></div>
+<div id="muestreo-estratificado-con-afijación-simple" class="section level3" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Muestreo estratificado con afijación simple</h3>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="programación-estadística-en-r.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estratificado PPT (probabilidad proporcional al tamaño) con afijación simple (mismo tamaño de muestra)</span></span>
+<span id="cb25-2"><a href="programación-estadística-en-r.html#cb25-2" aria-hidden="true" tabindex="-1"></a>muestra_estratificada <span class="ot">&lt;-</span> sampling<span class="sc">::</span><span class="fu">strata</span>(</span>
+<span id="cb25-3"><a href="programación-estadística-en-r.html#cb25-3" aria-hidden="true" tabindex="-1"></a>  marco_estratificado, </span>
+<span id="cb25-4"><a href="programación-estadística-en-r.html#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">stratanames =</span> <span class="st">&quot;id_estrato&quot;</span>,</span>
+<span id="cb25-5"><a href="programación-estadística-en-r.html#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="fu">rep</span>(<span class="dv">20</span>,<span class="dv">16</span>), </span>
+<span id="cb25-6"><a href="programación-estadística-en-r.html#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;systematic&quot;</span>, </span>
+<span id="cb25-7"><a href="programación-estadística-en-r.html#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">pik =</span> marco_estratificado<span class="sc">$</span>VIV2, </span>
+<span id="cb25-8"><a href="programación-estadística-en-r.html#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="cn">TRUE</span></span>
+<span id="cb25-9"><a href="programación-estadística-en-r.html#cb25-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## Stratum 1 
+## 
+## Population total and number of selected units: 2991 20</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 2 
+## 
+## Population total and number of selected units: 4715 20</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 3 
+## 
+## Population total and number of selected units: 1006 20</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 4 
+## 
+## Population total and number of selected units: 8330 20</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 5 
+## 
+## Population total and number of selected units: 2780 20</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 6 
+## 
+## Population total and number of selected units: 14394 20</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 7 
+## 
+## Population total and number of selected units: 1414 20</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 8 
+## 
+## Population total and number of selected units: 941 20</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 9 
+## 
+## Population total and number of selected units: 5244 20</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 10 
+## 
+## Population total and number of selected units: 3002 20</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 11 
+## 
+## Population total and number of selected units: 4893 20</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 12 
+## 
+## Population total and number of selected units: 2738 20</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 13 
+## 
+## Population total and number of selected units: 2217 20</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 14 
+## 
+## Population total and number of selected units: 2704 20</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 15 
+## 
+## Population total and number of selected units: 2533 20</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 16 
+## 
+## Population total and number of selected units: 3337 20</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Number of strata  16 
+## Total number of selected units 320</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="programación-estadística-en-r.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estratificado con afijación proporcional y probabilidad </span></span>
+<span id="cb59-2"><a href="programación-estadística-en-r.html#cb59-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-3"><a href="programación-estadística-en-r.html#cb59-3" aria-hidden="true" tabindex="-1"></a>afijacion_proporcional <span class="ot">&lt;-</span> marco_estratificado <span class="sc">%&gt;%</span> </span>
+<span id="cb59-4"><a href="programación-estadística-en-r.html#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id_estrato) <span class="sc">%&gt;%</span> </span>
+<span id="cb59-5"><a href="programación-estadística-en-r.html#cb59-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">viv_total =</span> <span class="fu">sum</span>(VIV2), <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb59-6"><a href="programación-estadística-en-r.html#cb59-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop_viv =</span> viv_total<span class="sc">/</span><span class="fu">sum</span>(viv_total),</span>
+<span id="cb59-7"><a href="programación-estadística-en-r.html#cb59-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">n_h =</span> <span class="fu">round</span>(prop_viv <span class="sc">*</span> <span class="dv">2500</span>, <span class="dv">0</span>)</span>
+<span id="cb59-8"><a href="programación-estadística-en-r.html#cb59-8" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb59-9"><a href="programación-estadística-en-r.html#cb59-9" aria-hidden="true" tabindex="-1"></a>                      </span>
+<span id="cb59-10"><a href="programación-estadística-en-r.html#cb59-10" aria-hidden="true" tabindex="-1"></a>muestra_estratificada2 <span class="ot">&lt;-</span> sampling<span class="sc">::</span><span class="fu">strata</span>(</span>
+<span id="cb59-11"><a href="programación-estadística-en-r.html#cb59-11" aria-hidden="true" tabindex="-1"></a>  marco_estratificado, </span>
+<span id="cb59-12"><a href="programación-estadística-en-r.html#cb59-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">stratanames =</span> <span class="st">&quot;id_estrato&quot;</span>,</span>
+<span id="cb59-13"><a href="programación-estadística-en-r.html#cb59-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> afijacion_proporcional <span class="sc">%&gt;%</span> <span class="fu">pull</span>(n_h),</span>
+<span id="cb59-14"><a href="programación-estadística-en-r.html#cb59-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;systematic&quot;</span>, </span>
+<span id="cb59-15"><a href="programación-estadística-en-r.html#cb59-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">pik =</span> marco_estratificado<span class="sc">$</span>VIV2,</span>
+<span id="cb59-16"><a href="programación-estadística-en-r.html#cb59-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="cn">TRUE</span></span>
+<span id="cb59-17"><a href="programación-estadística-en-r.html#cb59-17" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## Stratum 1 
+## 
+## Population total and number of selected units: 2991 120</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 2 
+## 
+## Population total and number of selected units: 4715 183</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 3 
+## 
+## Population total and number of selected units: 1006 48</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 4 
+## 
+## Population total and number of selected units: 8330 332</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 5 
+## 
+## Population total and number of selected units: 2780 107</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 6 
+## 
+## Population total and number of selected units: 14394 477</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 7 
+## 
+## Population total and number of selected units: 1414 66</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 8 
+## 
+## Population total and number of selected units: 941 29</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 9 
+## 
+## Population total and number of selected units: 5244 205</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 10 
+## 
+## Population total and number of selected units: 3002 94</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 11 
+## 
+## Population total and number of selected units: 4893 177</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 12 
+## 
+## Population total and number of selected units: 2738 105</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 13 
+## 
+## Population total and number of selected units: 2217 139</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 14 
+## 
+## Population total and number of selected units: 2704 177</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 15 
+## 
+## Population total and number of selected units: 2533 118</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Stratum 16 
+## 
+## Population total and number of selected units: 3337 125</code></pre>
+<pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
+<pre><code>## Number of strata  16 
+## Total number of selected units 2502</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="programación-estadística-en-r.html#cb93-1" aria-hidden="true" tabindex="-1"></a>muestra_estratificada_prob_ppt <span class="ot">&lt;-</span> marco_estratificado <span class="sc">%&gt;%</span> </span>
+<span id="cb93-2"><a href="programación-estadística-en-r.html#cb93-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ID_unit <span class="sc">%in%</span> muestra_estratificada2<span class="sc">$</span>ID_unit) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-3"><a href="programación-estadística-en-r.html#cb93-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(muestra_estratificada2, <span class="at">by =</span> <span class="st">&quot;ID_unit&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-4"><a href="programación-estadística-en-r.html#cb93-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fe_mzn =</span> <span class="dv">1</span><span class="sc">/</span>Prob)</span>
+<span id="cb93-5"><a href="programación-estadística-en-r.html#cb93-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-6"><a href="programación-estadística-en-r.html#cb93-6" aria-hidden="true" tabindex="-1"></a>muestra_estratificada_prob_ppt</span></code></pre></div>
+<pre><code>## # A tibble: 2,502 × 12
+##    ID_unit CVEGEO      VIV2 POB21 POB52 POB77 alcaldia id_estrato.x id_estrato.y
+##      &lt;int&gt; &lt;fct&gt;      &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt;        &lt;int&gt;
+##  1       9 090020001…    31   102    50    52 002                 1            1
+##  2      43 090020001…    44   129    72    57 002                 1            1
+##  3      64 090020001…    11    43    20    23 002                 1            1
+##  4      92 090020001…    46   131    64    67 002                 1            1
+##  5     128 090020001…    41   111    66    45 002                 1            1
+##  6     157 090020001…    39   127    66    61 002                 1            1
+##  7     200 090020001…    19    59    33    26 002                 1            1
+##  8     215 090020001…   164   422   222   200 002                 1            1
+##  9     236 090020001…    11    30    15    15 002                 1            1
+## 10     255 090020001…    70   168    96    72 002                 1            1
+## # … with 2,492 more rows, and 3 more variables: Prob &lt;dbl&gt;, Stratum &lt;int&gt;,
+## #   fe_mzn &lt;dbl&gt;</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Muestreo Estadístico.pdf", "Muestreo Estadístico.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
