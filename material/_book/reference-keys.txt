@@ -10,7 +10,7 @@ tipos-de-encuestas-según-la-forma-de-aplicación
 tipos-de-encuestas-según-sus-objetivos
 tipos-de-encuestas-según-las-preguntas
 ciclo-de-vida-de-una-encuesta
-relación-entre-muestreo-y-machine-learning
+tamaño-de-muestra
 programación-estadística-en-r
 carga-de-librerías-y-datos
 marco-de-muestreo

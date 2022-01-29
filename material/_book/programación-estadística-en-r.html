@@ -153,7 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.5.3" data-path="index.html"><a href="index.html#tipos-de-encuestas-según-las-preguntas"><i class="fa fa-check"></i><b>1.5.3</b> Tipos de encuestas según las preguntas</a></li>
 <li class="chapter" data-level="1.5.4" data-path="index.html"><a href="index.html#ciclo-de-vida-de-una-encuesta"><i class="fa fa-check"></i><b>1.5.4</b> Ciclo de vida de una encuesta</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#relación-entre-muestreo-y-machine-learning"><i class="fa fa-check"></i><b>1.6</b> Relación entre muestreo y machine learning</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#tamaño-de-muestra"><i class="fa fa-check"></i><b>1.6</b> Tamaño de muestra</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="programación-estadística-en-r.html"><a href="programación-estadística-en-r.html"><i class="fa fa-check"></i><b>2</b> Programación estadística en R</a>
 <ul>
@@ -192,17 +192,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.1</span> Carga de librerías y datos</h2>
 <p>El primer paso para realizar una muestra en <em>R</em> es cargar las librerías necesarias de trabajo y el/los conjuntos de datos que servirán como marco de muestreo.</p>
 <p><strong>Librerías</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="programación-estadística-en-r.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreign)</span>
-<span id="cb1-2"><a href="programación-estadística-en-r.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="programación-estadística-en-r.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) </span>
-<span id="cb1-4"><a href="programación-estadística-en-r.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr) </span>
-<span id="cb1-5"><a href="programación-estadística-en-r.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar)</span>
-<span id="cb1-6"><a href="programación-estadística-en-r.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sampling)</span>
-<span id="cb1-7"><a href="programación-estadística-en-r.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="programación-estadística-en-r.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreign)</span>
+<span id="cb6-2"><a href="programación-estadística-en-r.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb6-3"><a href="programación-estadística-en-r.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) </span>
+<span id="cb6-4"><a href="programación-estadística-en-r.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr) </span>
+<span id="cb6-5"><a href="programación-estadística-en-r.html#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb6-6"><a href="programación-estadística-en-r.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sampling)</span>
+<span id="cb6-7"><a href="programación-estadística-en-r.html#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span></code></pre></div>
 <p><strong>Carga de datos</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="programación-estadística-en-r.html#cb2-1" aria-hidden="true" tabindex="-1"></a>mzn_viv <span class="ot">&lt;-</span> <span class="fu">read.dbf</span>(<span class="st">&quot;data/cpv2010_manzanas_viviendas.dbf&quot;</span>)</span>
-<span id="cb2-2"><a href="programación-estadística-en-r.html#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="programación-estadística-en-r.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mzn_viv)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="programación-estadística-en-r.html#cb7-1" aria-hidden="true" tabindex="-1"></a>mzn_viv <span class="ot">&lt;-</span> <span class="fu">read.dbf</span>(<span class="st">&quot;data/cpv2010_manzanas_viviendas.dbf&quot;</span>)</span>
+<span id="cb7-2"><a href="programación-estadística-en-r.html#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="programación-estadística-en-r.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mzn_viv)</span></code></pre></div>
 <pre><code>##             CVEGEO VIV0 VIV1 VIV2 VIV2_R VIV3 VIV3_R VIV4_R VIV5_R VIV6 VIV6_R
 ## 1 0900200010010001   48   48   47   97.9  199   98.5    4.2    0.9    0      0
 ## 2 0900200010010002   45   44   41   93.2  149   94.3    3.6    0.9   -6     -6
@@ -259,9 +259,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4       0     0       0
 ## 5       0     0       0
 ## 6       0     0       0</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="programación-estadística-en-r.html#cb4-1" aria-hidden="true" tabindex="-1"></a>mzn_pob <span class="ot">&lt;-</span> <span class="fu">read.dbf</span>(<span class="st">&quot;data/manzanas.dbf&quot;</span>)</span>
-<span id="cb4-2"><a href="programación-estadística-en-r.html#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="programación-estadística-en-r.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mzn_pob)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="programación-estadística-en-r.html#cb9-1" aria-hidden="true" tabindex="-1"></a>mzn_pob <span class="ot">&lt;-</span> <span class="fu">read.dbf</span>(<span class="st">&quot;data/manzanas.dbf&quot;</span>)</span>
+<span id="cb9-2"><a href="programación-estadística-en-r.html#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="programación-estadística-en-r.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mzn_pob)</span></code></pre></div>
 <pre><code>##             CVEGEO POB1 POB2 POB2_R POB3 POB3_R POB4 POB4_R POB5 POB5_R POB6
 ## 1 0900200010542046    1   -6   -6.0   -6   -6.0   -6   -6.0   -6   -6.0   -6
 ## 2 0900200010542047    0    0   -8.0    0   -8.0    0   -8.0    0   -8.0    0
@@ -372,15 +372,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.2</span> Marco de muestreo</h2>
 <p>El marco de muestreo es el conjunto de datos que contiene a todos los elementos elegiblres en la muestra de acuerdo con la población objetiva definida por el investigador.</p>
 <p><strong>Creación de marco de muestreo</strong></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="programación-estadística-en-r.html#cb6-1" aria-hidden="true" tabindex="-1"></a>marco <span class="ot">&lt;-</span> mzn_viv <span class="sc">%&gt;%</span> </span>
-<span id="cb6-2"><a href="programación-estadística-en-r.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb6-3"><a href="programación-estadística-en-r.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(CVEGEO, VIV2) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-4"><a href="programación-estadística-en-r.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(mzn_pob, <span class="at">by =</span> <span class="st">&quot;CVEGEO&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-5"><a href="programación-estadística-en-r.html#cb6-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">ID_unit =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(mzn_viv)) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-6"><a href="programación-estadística-en-r.html#cb6-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(ID_unit, CVEGEO, VIV2, POB21, POB52, POB77) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-7"><a href="programación-estadística-en-r.html#cb6-7" aria-hidden="true" tabindex="-1"></a>  naniar<span class="sc">::</span><span class="fu">replace_with_na_if</span>(<span class="at">.predicate =</span> is.numeric, <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">&lt;</span> <span class="dv">0</span>)</span>
-<span id="cb6-8"><a href="programación-estadística-en-r.html#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="programación-estadística-en-r.html#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(marco)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="programación-estadística-en-r.html#cb11-1" aria-hidden="true" tabindex="-1"></a>marco <span class="ot">&lt;-</span> mzn_viv <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="programación-estadística-en-r.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="programación-estadística-en-r.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(CVEGEO, VIV2) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-4"><a href="programación-estadística-en-r.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(mzn_pob, <span class="at">by =</span> <span class="st">&quot;CVEGEO&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-5"><a href="programación-estadística-en-r.html#cb11-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">ID_unit =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(mzn_viv)) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-6"><a href="programación-estadística-en-r.html#cb11-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(ID_unit, CVEGEO, VIV2, POB21, POB52, POB77) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-7"><a href="programación-estadística-en-r.html#cb11-7" aria-hidden="true" tabindex="-1"></a>  naniar<span class="sc">::</span><span class="fu">replace_with_na_if</span>(<span class="at">.predicate =</span> is.numeric, <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">&lt;</span> <span class="dv">0</span>)</span>
+<span id="cb11-8"><a href="programación-estadística-en-r.html#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="programación-estadística-en-r.html#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(marco)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 6
 ##   ID_unit CVEGEO            VIV2 POB21 POB52 POB77
 ##     &lt;int&gt; &lt;fct&gt;            &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
@@ -404,25 +404,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="muestreo-aleatorio-simple-sincon-remplazo" class="section level3" number="2.3.1">
 <h3><span class="header-section-number">2.3.1</span> Muestreo aleatorio simple sin/con remplazo</h3>
 <p><strong>Métodos de muestreo</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="programación-estadística-en-r.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># srswor MAS sin remplazo</span></span>
-<span id="cb8-2"><a href="programación-estadística-en-r.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># srswr MAS con remplazo</span></span>
-<span id="cb8-3"><a href="programación-estadística-en-r.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># systematic proporcional al tama?o</span></span>
-<span id="cb8-4"><a href="programación-estadística-en-r.html#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="programación-estadística-en-r.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">310308261</span>)</span>
-<span id="cb8-6"><a href="programación-estadística-en-r.html#cb8-6" aria-hidden="true" tabindex="-1"></a>muestra <span class="ot">&lt;-</span> sampling<span class="sc">::</span><span class="fu">strata</span>(</span>
-<span id="cb8-7"><a href="programación-estadística-en-r.html#cb8-7" aria-hidden="true" tabindex="-1"></a>  marco, </span>
-<span id="cb8-8"><a href="programación-estadística-en-r.html#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">stratanames =</span> <span class="cn">NULL</span>, </span>
-<span id="cb8-9"><a href="programación-estadística-en-r.html#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">20</span>, </span>
-<span id="cb8-10"><a href="programación-estadística-en-r.html#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;srswor&quot;</span>, </span>
-<span id="cb8-11"><a href="programación-estadística-en-r.html#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="cn">TRUE</span></span>
-<span id="cb8-12"><a href="programación-estadística-en-r.html#cb8-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="programación-estadística-en-r.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># srswor MAS sin remplazo</span></span>
+<span id="cb13-2"><a href="programación-estadística-en-r.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># srswr MAS con remplazo</span></span>
+<span id="cb13-3"><a href="programación-estadística-en-r.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># systematic proporcional al tama?o</span></span>
+<span id="cb13-4"><a href="programación-estadística-en-r.html#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="programación-estadística-en-r.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">310308261</span>)</span>
+<span id="cb13-6"><a href="programación-estadística-en-r.html#cb13-6" aria-hidden="true" tabindex="-1"></a>muestra <span class="ot">&lt;-</span> sampling<span class="sc">::</span><span class="fu">strata</span>(</span>
+<span id="cb13-7"><a href="programación-estadística-en-r.html#cb13-7" aria-hidden="true" tabindex="-1"></a>  marco, </span>
+<span id="cb13-8"><a href="programación-estadística-en-r.html#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">stratanames =</span> <span class="cn">NULL</span>, </span>
+<span id="cb13-9"><a href="programación-estadística-en-r.html#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">20</span>, </span>
+<span id="cb13-10"><a href="programación-estadística-en-r.html#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;srswor&quot;</span>, </span>
+<span id="cb13-11"><a href="programación-estadística-en-r.html#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="cn">TRUE</span></span>
+<span id="cb13-12"><a href="programación-estadística-en-r.html#cb13-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## 
 ## Population total and number of selected units: 63239 20</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="programación-estadística-en-r.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># factor de expansion</span></span>
-<span id="cb10-2"><a href="programación-estadística-en-r.html#cb10-2" aria-hidden="true" tabindex="-1"></a>muestra_ponde <span class="ot">&lt;-</span> <span class="fu">getdata</span>(marco, muestra) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-3"><a href="programación-estadística-en-r.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fe_mzn =</span> <span class="dv">1</span><span class="sc">/</span>Prob)</span>
-<span id="cb10-4"><a href="programación-estadística-en-r.html#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="programación-estadística-en-r.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(muestra_ponde)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="programación-estadística-en-r.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># factor de expansion</span></span>
+<span id="cb15-2"><a href="programación-estadística-en-r.html#cb15-2" aria-hidden="true" tabindex="-1"></a>muestra_ponde <span class="ot">&lt;-</span> <span class="fu">getdata</span>(marco, muestra) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="programación-estadística-en-r.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fe_mzn =</span> <span class="dv">1</span><span class="sc">/</span>Prob)</span>
+<span id="cb15-4"><a href="programación-estadística-en-r.html#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="programación-estadística-en-r.html#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(muestra_ponde)</span></code></pre></div>
 <pre><code>##             CVEGEO VIV2 POB21 POB52 POB77 ID_unit         Prob  fe_mzn
 ## 1 0900200010487009   44   125    64    61    1152 0.0003162605 3161.95
 ## 2 0900200010932006   10    28    13    15    2289 0.0003162605 3161.95
@@ -431,80 +431,80 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5 0900500010296028    0     0     0     0    9384 0.0003162605 3161.95
 ## 6 0900500010402001   83   208   107   101    9713 0.0003162605 3161.95</code></pre>
 <p><strong>Estimación del numero de viviendas con base en una muestra de 20 manzanas</strong></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="programación-estadística-en-r.html#cb12-1" aria-hidden="true" tabindex="-1"></a>muestra_ponde <span class="sc">%&gt;%</span> </span>
-<span id="cb12-2"><a href="programación-estadística-en-r.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb12-3"><a href="programación-estadística-en-r.html#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Total =</span> <span class="fu">sum</span>(fe_mzn), </span>
-<span id="cb12-4"><a href="programación-estadística-en-r.html#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">pob_total =</span> <span class="fu">sum</span>(fe_mzn<span class="sc">*</span>POB21),</span>
-<span id="cb12-5"><a href="programación-estadística-en-r.html#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">viviendas =</span> <span class="fu">sum</span>(fe_mzn <span class="sc">*</span> VIV2)</span>
-<span id="cb12-6"><a href="programación-estadística-en-r.html#cb12-6" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="programación-estadística-en-r.html#cb17-1" aria-hidden="true" tabindex="-1"></a>muestra_ponde <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="programación-estadística-en-r.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb17-3"><a href="programación-estadística-en-r.html#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Total =</span> <span class="fu">sum</span>(fe_mzn), </span>
+<span id="cb17-4"><a href="programación-estadística-en-r.html#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">pob_total =</span> <span class="fu">sum</span>(fe_mzn<span class="sc">*</span>POB21),</span>
+<span id="cb17-5"><a href="programación-estadística-en-r.html#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">viviendas =</span> <span class="fu">sum</span>(fe_mzn <span class="sc">*</span> VIV2)</span>
+<span id="cb17-6"><a href="programación-estadística-en-r.html#cb17-6" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
 <pre><code>##   Total pob_total viviendas
 ## 1 63239   6839298   2687658</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="programación-estadística-en-r.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># valores reales</span></span>
-<span id="cb14-2"><a href="programación-estadística-en-r.html#cb14-2" aria-hidden="true" tabindex="-1"></a>marco <span class="sc">%&gt;%</span> </span>
-<span id="cb14-3"><a href="programación-estadística-en-r.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb14-4"><a href="programación-estadística-en-r.html#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">viviendas =</span> <span class="fu">sum</span>(VIV2),</span>
-<span id="cb14-5"><a href="programación-estadística-en-r.html#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">pob_total =</span> <span class="fu">sum</span>(POB21, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb14-6"><a href="programación-estadística-en-r.html#cb14-6" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="programación-estadística-en-r.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># valores reales</span></span>
+<span id="cb19-2"><a href="programación-estadística-en-r.html#cb19-2" aria-hidden="true" tabindex="-1"></a>marco <span class="sc">%&gt;%</span> </span>
+<span id="cb19-3"><a href="programación-estadística-en-r.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb19-4"><a href="programación-estadística-en-r.html#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">viviendas =</span> <span class="fu">sum</span>(VIV2),</span>
+<span id="cb19-5"><a href="programación-estadística-en-r.html#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">pob_total =</span> <span class="fu">sum</span>(POB21, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-6"><a href="programación-estadística-en-r.html#cb19-6" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 2
 ##   viviendas pob_total
 ##       &lt;int&gt;     &lt;int&gt;
 ## 1   2378763   6212042</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="programación-estadística-en-r.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#error relativo viviendas</span></span>
-<span id="cb16-2"><a href="programación-estadística-en-r.html#cb16-2" aria-hidden="true" tabindex="-1"></a>dif <span class="ot">=</span> (<span class="dv">2378763</span> <span class="sc">-</span> <span class="dv">2260794</span>) <span class="sc">/</span> <span class="dv">2378763</span></span>
-<span id="cb16-3"><a href="programación-estadística-en-r.html#cb16-3" aria-hidden="true" tabindex="-1"></a>dif</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="programación-estadística-en-r.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#error relativo viviendas</span></span>
+<span id="cb21-2"><a href="programación-estadística-en-r.html#cb21-2" aria-hidden="true" tabindex="-1"></a>dif <span class="ot">=</span> (<span class="dv">2378763</span> <span class="sc">-</span> <span class="dv">2260794</span>) <span class="sc">/</span> <span class="dv">2378763</span></span>
+<span id="cb21-3"><a href="programación-estadística-en-r.html#cb21-3" aria-hidden="true" tabindex="-1"></a>dif</span></code></pre></div>
 <pre><code>## [1] 0.04959258</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="programación-estadística-en-r.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#error relativo poblacion</span></span>
-<span id="cb18-2"><a href="programación-estadística-en-r.html#cb18-2" aria-hidden="true" tabindex="-1"></a>dif2 <span class="ot">=</span> (<span class="dv">6640095</span> <span class="sc">-</span> <span class="dv">6634328</span>) <span class="sc">/</span> <span class="dv">6640095</span></span>
-<span id="cb18-3"><a href="programación-estadística-en-r.html#cb18-3" aria-hidden="true" tabindex="-1"></a>dif2</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="programación-estadística-en-r.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#error relativo poblacion</span></span>
+<span id="cb23-2"><a href="programación-estadística-en-r.html#cb23-2" aria-hidden="true" tabindex="-1"></a>dif2 <span class="ot">=</span> (<span class="dv">6640095</span> <span class="sc">-</span> <span class="dv">6634328</span>) <span class="sc">/</span> <span class="dv">6640095</span></span>
+<span id="cb23-3"><a href="programación-estadística-en-r.html#cb23-3" aria-hidden="true" tabindex="-1"></a>dif2</span></code></pre></div>
 <pre><code>## [1] 0.0008685117</code></pre>
 </div>
 <div id="muestreo-con-probabilidades-desiguales" class="section level3" number="2.3.2">
 <h3><span class="header-section-number">2.3.2</span> Muestreo con probabilidades desiguales</h3>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="programación-estadística-en-r.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;systematic&quot; probabilidades desiguales </span></span>
-<span id="cb20-2"><a href="programación-estadística-en-r.html#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="programación-estadística-en-r.html#cb20-3" aria-hidden="true" tabindex="-1"></a>muestra2 <span class="ot">&lt;-</span> sampling<span class="sc">::</span><span class="fu">strata</span>(</span>
-<span id="cb20-4"><a href="programación-estadística-en-r.html#cb20-4" aria-hidden="true" tabindex="-1"></a>  marco, </span>
-<span id="cb20-5"><a href="programación-estadística-en-r.html#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">stratanames =</span> <span class="cn">NULL</span>, </span>
-<span id="cb20-6"><a href="programación-estadística-en-r.html#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">20</span>,</span>
-<span id="cb20-7"><a href="programación-estadística-en-r.html#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;systematic&quot;</span>, </span>
-<span id="cb20-8"><a href="programación-estadística-en-r.html#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">pik =</span> marco<span class="sc">$</span>VIV2, </span>
-<span id="cb20-9"><a href="programación-estadística-en-r.html#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="cn">TRUE</span></span>
-<span id="cb20-10"><a href="programación-estadística-en-r.html#cb20-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="programación-estadística-en-r.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;systematic&quot; probabilidades desiguales </span></span>
+<span id="cb25-2"><a href="programación-estadística-en-r.html#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="programación-estadística-en-r.html#cb25-3" aria-hidden="true" tabindex="-1"></a>muestra2 <span class="ot">&lt;-</span> sampling<span class="sc">::</span><span class="fu">strata</span>(</span>
+<span id="cb25-4"><a href="programación-estadística-en-r.html#cb25-4" aria-hidden="true" tabindex="-1"></a>  marco, </span>
+<span id="cb25-5"><a href="programación-estadística-en-r.html#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">stratanames =</span> <span class="cn">NULL</span>, </span>
+<span id="cb25-6"><a href="programación-estadística-en-r.html#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">20</span>,</span>
+<span id="cb25-7"><a href="programación-estadística-en-r.html#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;systematic&quot;</span>, </span>
+<span id="cb25-8"><a href="programación-estadística-en-r.html#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">pik =</span> marco<span class="sc">$</span>VIV2, </span>
+<span id="cb25-9"><a href="programación-estadística-en-r.html#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="cn">TRUE</span></span>
+<span id="cb25-10"><a href="programación-estadística-en-r.html#cb25-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## Warning in inclusionprobabilities(pik, size): there are zero values in the initial vector a</code></pre>
 <pre><code>## 
 ## Population total and number of selected units: 63239 20</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="programación-estadística-en-r.html#cb23-1" aria-hidden="true" tabindex="-1"></a>muestra_ponde <span class="ot">&lt;-</span> marco <span class="sc">%&gt;%</span> </span>
-<span id="cb23-2"><a href="programación-estadística-en-r.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ID_unit <span class="sc">%in%</span> muestra2<span class="sc">$</span>ID_unit) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-3"><a href="programación-estadística-en-r.html#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(muestra2, <span class="at">by =</span> <span class="st">&quot;ID_unit&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb23-4"><a href="programación-estadística-en-r.html#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fe_mzn =</span> <span class="dv">1</span><span class="sc">/</span>Prob) <span class="co">#fe_mzn: factor de expansion</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="programación-estadística-en-r.html#cb28-1" aria-hidden="true" tabindex="-1"></a>muestra_ponde <span class="ot">&lt;-</span> marco <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a href="programación-estadística-en-r.html#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ID_unit <span class="sc">%in%</span> muestra2<span class="sc">$</span>ID_unit) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-3"><a href="programación-estadística-en-r.html#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(muestra2, <span class="at">by =</span> <span class="st">&quot;ID_unit&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-4"><a href="programación-estadística-en-r.html#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fe_mzn =</span> <span class="dv">1</span><span class="sc">/</span>Prob) <span class="co">#fe_mzn: factor de expansion</span></span></code></pre></div>
 </div>
 </div>
 <div id="muestreo-estratificado" class="section level2" number="2.4">
 <h2><span class="header-section-number">2.4</span> Muestreo estratificado</h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="programación-estadística-en-r.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable de estratificación: por alcaldía </span></span>
-<span id="cb24-2"><a href="programación-estadística-en-r.html#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="programación-estadística-en-r.html#cb24-3" aria-hidden="true" tabindex="-1"></a>marco_estratificado <span class="ot">&lt;-</span> marco <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">alcaldia =</span> <span class="fu">str_sub</span>(CVEGEO,<span class="dv">3</span>,<span class="dv">5</span>) ) </span>
-<span id="cb24-4"><a href="programación-estadística-en-r.html#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="programación-estadística-en-r.html#cb24-5" aria-hidden="true" tabindex="-1"></a>diccionario_estratos <span class="ot">&lt;-</span> marco_estratificado <span class="sc">%&gt;%</span></span>
-<span id="cb24-6"><a href="programación-estadística-en-r.html#cb24-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(alcaldia) <span class="sc">%&gt;%</span> </span>
-<span id="cb24-7"><a href="programación-estadística-en-r.html#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb24-8"><a href="programación-estadística-en-r.html#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id_estrato =</span> <span class="fu">row_number</span>())</span>
-<span id="cb24-9"><a href="programación-estadística-en-r.html#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-10"><a href="programación-estadística-en-r.html#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-11"><a href="programación-estadística-en-r.html#cb24-11" aria-hidden="true" tabindex="-1"></a>marco_estratificado <span class="ot">&lt;-</span> marco_estratificado <span class="sc">%&gt;%</span> </span>
-<span id="cb24-12"><a href="programación-estadística-en-r.html#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(diccionario_estratos, <span class="at">by =</span> <span class="st">&quot;alcaldia&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb24-13"><a href="programación-estadística-en-r.html#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(id_estrato)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="programación-estadística-en-r.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable de estratificación: por alcaldía </span></span>
+<span id="cb29-2"><a href="programación-estadística-en-r.html#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="programación-estadística-en-r.html#cb29-3" aria-hidden="true" tabindex="-1"></a>marco_estratificado <span class="ot">&lt;-</span> marco <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">alcaldia =</span> <span class="fu">str_sub</span>(CVEGEO,<span class="dv">3</span>,<span class="dv">5</span>) ) </span>
+<span id="cb29-4"><a href="programación-estadística-en-r.html#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="programación-estadística-en-r.html#cb29-5" aria-hidden="true" tabindex="-1"></a>diccionario_estratos <span class="ot">&lt;-</span> marco_estratificado <span class="sc">%&gt;%</span></span>
+<span id="cb29-6"><a href="programación-estadística-en-r.html#cb29-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(alcaldia) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-7"><a href="programación-estadística-en-r.html#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb29-8"><a href="programación-estadística-en-r.html#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id_estrato =</span> <span class="fu">row_number</span>())</span>
+<span id="cb29-9"><a href="programación-estadística-en-r.html#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="programación-estadística-en-r.html#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="programación-estadística-en-r.html#cb29-11" aria-hidden="true" tabindex="-1"></a>marco_estratificado <span class="ot">&lt;-</span> marco_estratificado <span class="sc">%&gt;%</span> </span>
+<span id="cb29-12"><a href="programación-estadística-en-r.html#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(diccionario_estratos, <span class="at">by =</span> <span class="st">&quot;alcaldia&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb29-13"><a href="programación-estadística-en-r.html#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(id_estrato)</span></code></pre></div>
 <div id="muestreo-estratificado-con-afijación-simple" class="section level3" number="2.4.1">
 <h3><span class="header-section-number">2.4.1</span> Muestreo estratificado con afijación simple</h3>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="programación-estadística-en-r.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estratificado PPT (probabilidad proporcional al tamaño) con afijación simple (mismo tamaño de muestra)</span></span>
-<span id="cb25-2"><a href="programación-estadística-en-r.html#cb25-2" aria-hidden="true" tabindex="-1"></a>muestra_estratificada <span class="ot">&lt;-</span> sampling<span class="sc">::</span><span class="fu">strata</span>(</span>
-<span id="cb25-3"><a href="programación-estadística-en-r.html#cb25-3" aria-hidden="true" tabindex="-1"></a>  marco_estratificado, </span>
-<span id="cb25-4"><a href="programación-estadística-en-r.html#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">stratanames =</span> <span class="st">&quot;id_estrato&quot;</span>,</span>
-<span id="cb25-5"><a href="programación-estadística-en-r.html#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="fu">rep</span>(<span class="dv">20</span>,<span class="dv">16</span>), </span>
-<span id="cb25-6"><a href="programación-estadística-en-r.html#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;systematic&quot;</span>, </span>
-<span id="cb25-7"><a href="programación-estadística-en-r.html#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">pik =</span> marco_estratificado<span class="sc">$</span>VIV2, </span>
-<span id="cb25-8"><a href="programación-estadística-en-r.html#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="cn">TRUE</span></span>
-<span id="cb25-9"><a href="programación-estadística-en-r.html#cb25-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="programación-estadística-en-r.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estratificado PPT (probabilidad proporcional al tamaño) con afijación simple (mismo tamaño de muestra)</span></span>
+<span id="cb30-2"><a href="programación-estadística-en-r.html#cb30-2" aria-hidden="true" tabindex="-1"></a>muestra_estratificada <span class="ot">&lt;-</span> sampling<span class="sc">::</span><span class="fu">strata</span>(</span>
+<span id="cb30-3"><a href="programación-estadística-en-r.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  marco_estratificado, </span>
+<span id="cb30-4"><a href="programación-estadística-en-r.html#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">stratanames =</span> <span class="st">&quot;id_estrato&quot;</span>,</span>
+<span id="cb30-5"><a href="programación-estadística-en-r.html#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="fu">rep</span>(<span class="dv">20</span>,<span class="dv">16</span>), </span>
+<span id="cb30-6"><a href="programación-estadística-en-r.html#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;systematic&quot;</span>, </span>
+<span id="cb30-7"><a href="programación-estadística-en-r.html#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">pik =</span> marco_estratificado<span class="sc">$</span>VIV2, </span>
+<span id="cb30-8"><a href="programación-estadística-en-r.html#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="cn">TRUE</span></span>
+<span id="cb30-9"><a href="programación-estadística-en-r.html#cb30-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## Stratum 1 
 ## 
 ## Population total and number of selected units: 2991 20</code></pre>
@@ -571,23 +571,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
 <pre><code>## Number of strata  16 
 ## Total number of selected units 320</code></pre>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="programación-estadística-en-r.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estratificado con afijación proporcional y probabilidad </span></span>
-<span id="cb59-2"><a href="programación-estadística-en-r.html#cb59-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-3"><a href="programación-estadística-en-r.html#cb59-3" aria-hidden="true" tabindex="-1"></a>afijacion_proporcional <span class="ot">&lt;-</span> marco_estratificado <span class="sc">%&gt;%</span> </span>
-<span id="cb59-4"><a href="programación-estadística-en-r.html#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id_estrato) <span class="sc">%&gt;%</span> </span>
-<span id="cb59-5"><a href="programación-estadística-en-r.html#cb59-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">viv_total =</span> <span class="fu">sum</span>(VIV2), <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb59-6"><a href="programación-estadística-en-r.html#cb59-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop_viv =</span> viv_total<span class="sc">/</span><span class="fu">sum</span>(viv_total),</span>
-<span id="cb59-7"><a href="programación-estadística-en-r.html#cb59-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">n_h =</span> <span class="fu">round</span>(prop_viv <span class="sc">*</span> <span class="dv">2500</span>, <span class="dv">0</span>)</span>
-<span id="cb59-8"><a href="programación-estadística-en-r.html#cb59-8" aria-hidden="true" tabindex="-1"></a>         )</span>
-<span id="cb59-9"><a href="programación-estadística-en-r.html#cb59-9" aria-hidden="true" tabindex="-1"></a>                      </span>
-<span id="cb59-10"><a href="programación-estadística-en-r.html#cb59-10" aria-hidden="true" tabindex="-1"></a>muestra_estratificada2 <span class="ot">&lt;-</span> sampling<span class="sc">::</span><span class="fu">strata</span>(</span>
-<span id="cb59-11"><a href="programación-estadística-en-r.html#cb59-11" aria-hidden="true" tabindex="-1"></a>  marco_estratificado, </span>
-<span id="cb59-12"><a href="programación-estadística-en-r.html#cb59-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">stratanames =</span> <span class="st">&quot;id_estrato&quot;</span>,</span>
-<span id="cb59-13"><a href="programación-estadística-en-r.html#cb59-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> afijacion_proporcional <span class="sc">%&gt;%</span> <span class="fu">pull</span>(n_h),</span>
-<span id="cb59-14"><a href="programación-estadística-en-r.html#cb59-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;systematic&quot;</span>, </span>
-<span id="cb59-15"><a href="programación-estadística-en-r.html#cb59-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">pik =</span> marco_estratificado<span class="sc">$</span>VIV2,</span>
-<span id="cb59-16"><a href="programación-estadística-en-r.html#cb59-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="cn">TRUE</span></span>
-<span id="cb59-17"><a href="programación-estadística-en-r.html#cb59-17" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="programación-estadística-en-r.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estratificado con afijación proporcional y probabilidad </span></span>
+<span id="cb64-2"><a href="programación-estadística-en-r.html#cb64-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-3"><a href="programación-estadística-en-r.html#cb64-3" aria-hidden="true" tabindex="-1"></a>afijacion_proporcional <span class="ot">&lt;-</span> marco_estratificado <span class="sc">%&gt;%</span> </span>
+<span id="cb64-4"><a href="programación-estadística-en-r.html#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id_estrato) <span class="sc">%&gt;%</span> </span>
+<span id="cb64-5"><a href="programación-estadística-en-r.html#cb64-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">viv_total =</span> <span class="fu">sum</span>(VIV2), <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb64-6"><a href="programación-estadística-en-r.html#cb64-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop_viv =</span> viv_total<span class="sc">/</span><span class="fu">sum</span>(viv_total),</span>
+<span id="cb64-7"><a href="programación-estadística-en-r.html#cb64-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">n_h =</span> <span class="fu">round</span>(prop_viv <span class="sc">*</span> <span class="dv">2500</span>, <span class="dv">0</span>)</span>
+<span id="cb64-8"><a href="programación-estadística-en-r.html#cb64-8" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb64-9"><a href="programación-estadística-en-r.html#cb64-9" aria-hidden="true" tabindex="-1"></a>                      </span>
+<span id="cb64-10"><a href="programación-estadística-en-r.html#cb64-10" aria-hidden="true" tabindex="-1"></a>muestra_estratificada2 <span class="ot">&lt;-</span> sampling<span class="sc">::</span><span class="fu">strata</span>(</span>
+<span id="cb64-11"><a href="programación-estadística-en-r.html#cb64-11" aria-hidden="true" tabindex="-1"></a>  marco_estratificado, </span>
+<span id="cb64-12"><a href="programación-estadística-en-r.html#cb64-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">stratanames =</span> <span class="st">&quot;id_estrato&quot;</span>,</span>
+<span id="cb64-13"><a href="programación-estadística-en-r.html#cb64-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> afijacion_proporcional <span class="sc">%&gt;%</span> <span class="fu">pull</span>(n_h),</span>
+<span id="cb64-14"><a href="programación-estadística-en-r.html#cb64-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;systematic&quot;</span>, </span>
+<span id="cb64-15"><a href="programación-estadística-en-r.html#cb64-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">pik =</span> marco_estratificado<span class="sc">$</span>VIV2,</span>
+<span id="cb64-16"><a href="programación-estadística-en-r.html#cb64-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="cn">TRUE</span></span>
+<span id="cb64-17"><a href="programación-estadística-en-r.html#cb64-17" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## Stratum 1 
 ## 
 ## Population total and number of selected units: 2991 120</code></pre>
@@ -654,12 +654,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## Warning in inclusionprobabilities(pik[y], size[i]): there are zero values in the initial vector a</code></pre>
 <pre><code>## Number of strata  16 
 ## Total number of selected units 2502</code></pre>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="programación-estadística-en-r.html#cb93-1" aria-hidden="true" tabindex="-1"></a>muestra_estratificada_prob_ppt <span class="ot">&lt;-</span> marco_estratificado <span class="sc">%&gt;%</span> </span>
-<span id="cb93-2"><a href="programación-estadística-en-r.html#cb93-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ID_unit <span class="sc">%in%</span> muestra_estratificada2<span class="sc">$</span>ID_unit) <span class="sc">%&gt;%</span> </span>
-<span id="cb93-3"><a href="programación-estadística-en-r.html#cb93-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(muestra_estratificada2, <span class="at">by =</span> <span class="st">&quot;ID_unit&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb93-4"><a href="programación-estadística-en-r.html#cb93-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fe_mzn =</span> <span class="dv">1</span><span class="sc">/</span>Prob)</span>
-<span id="cb93-5"><a href="programación-estadística-en-r.html#cb93-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb93-6"><a href="programación-estadística-en-r.html#cb93-6" aria-hidden="true" tabindex="-1"></a>muestra_estratificada_prob_ppt</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="programación-estadística-en-r.html#cb98-1" aria-hidden="true" tabindex="-1"></a>muestra_estratificada_prob_ppt <span class="ot">&lt;-</span> marco_estratificado <span class="sc">%&gt;%</span> </span>
+<span id="cb98-2"><a href="programación-estadística-en-r.html#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ID_unit <span class="sc">%in%</span> muestra_estratificada2<span class="sc">$</span>ID_unit) <span class="sc">%&gt;%</span> </span>
+<span id="cb98-3"><a href="programación-estadística-en-r.html#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(muestra_estratificada2, <span class="at">by =</span> <span class="st">&quot;ID_unit&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb98-4"><a href="programación-estadística-en-r.html#cb98-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fe_mzn =</span> <span class="dv">1</span><span class="sc">/</span>Prob)</span>
+<span id="cb98-5"><a href="programación-estadística-en-r.html#cb98-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-6"><a href="programación-estadística-en-r.html#cb98-6" aria-hidden="true" tabindex="-1"></a>muestra_estratificada_prob_ppt</span></code></pre></div>
 <pre><code>## # A tibble: 2,502 × 12
 ##    ID_unit CVEGEO      VIV2 POB21 POB52 POB77 alcaldia id_estrato.x id_estrato.y
 ##      &lt;int&gt; &lt;fct&gt;      &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;           &lt;int&gt;        &lt;int&gt;
