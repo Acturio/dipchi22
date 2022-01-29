@@ -304,27 +304,101 @@ edición para este individuo.
 5. **Análisis y entrega de resultados:** el proceso estadístico arroja estimaciones que permiten la
 toma de decisiones y la resolución de los objetivos propuestos al comienzo de la investigación.
 
-## Relación entre muestreo y machine learning
 
-**Muestreo para conjunto de entrenamiento**
+## Tamaño de muestra
 
-El muestreo de datos proporciona una colección de técnicas que transforman un conjunto de datos de entrenamiento para equilibrar la distribución de clases. Una vez equilibrados los datos, los algoritmos de machine learning se pueden entrenar directamente en el conjunto de datos transformado sin ninguna modificación. Esto permite abordar el desafío de la clasificación desequilibrada, incluso con distribuciones de clases severamente desequilibradas, con un método de preparación de datos.
+Es imprescindible en una buena estimación conocer el tamaño de muestra adecuado que permitirá controlar o cuantificar el error de muestreo.
 
-El muestreo solo se realiza en el conjunto de datos de entrenamiento, no se realiza en al conjunto de prueba.
-La razón es que la intención no es eliminar el sesgo de clase del ajuste del modelo, sino continuar evaluando el modelo resultante sobre datos que son tanto reales como representativos del dominio del problema objetivo.
+Se presenta a continuación la fórmula estadística que permite conocer el tamaño de muestra necesario para lograr con 95% de confianza ($\alpha$) un error de muestreo (e).
 
-**Muestreo para cartera de clientes**
+$$
+m=\frac{p(1-p)Z_{1-\alpha/2}^2}{e²};
+$$
+$$n=\frac{m}{1+\frac{m}{N}}$$
 
-Cuando la base de clientes es grande, es demasiado costoso encuestar a todos los clientes. 
-En el caso de que se hagan experimentos para inferir el mejor método de retención o publicidad, 
-resulta riesgoso aplicar la misma metodología a todos los clientes sin antes haber seleccionado el metodo que genera un
-mejor resultado, es por eso que un diseño de muestra probabilística es la mejor opción para resolver este tipo de problemas.
+**Donde:**
 
-La estimación del nivel de satisfacción de toda la población de clientes a través de una muestra representativa es más eficiente. Para obtener muestras representativas, se deben utilizar métodos científicos de muestreo probabilístico. Hay cuatro tipos básicos de muestreo probabilístico:
+N = Es el tamaño de población.
 
-* Muestreo aleatorio simple
-* Muestreo sistemático
-* Muestreo estratificado
-* Muestreo por conglomerados
-* Muestreo PPT
+n = Tamaño de muestra.
+
+p = Proporción esperada (50% por default).
+
+$Z_{1-\alpha/2}$ = Percentil $\alpha/2$ de la distribución Normal estándar.
+
+
+En la medida en que se desea disminuir el error de muestreo, es necesario incrementar de manera exponencial el tamaño de muestra. Se presenta a continuación una gráfica que permite conocer el tamaño de muestra de acuerdo con el error de muestreo a tolerar.
+
+```{r}
+n_muestra <- function(e = 0.04, p = 0.5, alpha = 0.95, N = 100000){
+  
+  m = p*(1-p)*(qnorm(1- (1-alpha)/2)/e)^2
+  n = ceiling(m/(1 + m/N)) 
+
+  return(n)
+}
+```
+**Ejemplo**
+
+Suponiendo un tamaño poblacional de 3 millones de personas, y con 95% de confianza un error máximo a tolerar de 2%, el tamaño de muestra necesario para estimar una proporción es:
+
+```{r}
+n_muestra(e = 0.02, p = 0.5, alpha = 0.95, N = 3000000)
+```
+
+En este ejemplo, por practicidad se redondea el tamaño de la muestra a 2400 unidades. Veamos ahora una gráfica que permita anañizar la relación existente entre el tamaño de muestra y el error de muestreo.
+
+```{r, warning=F, message=FALSE}
+library(dplyr)
+library(ggplot2)
+
+tam_muestra <- tibble(error = seq(0.02, 0.1, by = 0.001))
+
+tam_muestra %>% 
+  mutate(n = n_muestra(e = error)) %>% 
+  ggplot(aes(x = error, y = n)) +
+  geom_line() +
+  geom_point() +
+  ggtitle("Relación entre error de muestreo y tamaño de muestra") +
+  xlab("Error de muestreo") +
+  ylab("Tamaño de muestra")
+
+```
+
+Ahora analizaremos la relación existente entre el tamaño de muestra y el tamaño poblacional cuando fijamos el error de muestreo en 3.5%.
+
+
+```{r, warning=F, message=FALSE}
+tam_muestra <- tibble(N = seq(1000, 100000, by = 1000))
+
+tam_muestra %>% 
+  mutate(n = n_muestra(e = 0.035, N = N)) %>% 
+  ggplot(aes(x = N, y = n)) +
+  geom_line() +
+  geom_point() +
+  ggtitle("Relación entre tamaño de población y tamaño de muestra") +
+  xlab("Tamaño de población") +
+  ylab("Tamaño de muestra")
+
+```
+
+Se puede apreciar que a mayor tamaño de población es necesario una muestra más grande, sin embargo, no es un comportamiento lineal. Debido a que una de las condiciones de muestreo es que la selección es aleatoria, existe un punto de saturación de información, en donde no se necesita aumentar más el tamaño de muestra (aunque el tamaño de la población siga creciendo)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
