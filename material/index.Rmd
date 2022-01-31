@@ -1,7 +1,7 @@
 --- 
 title: "Análisis Estadístico: Muestreo"
 author:
- - Oscar Arturo Bringas López
+ - Act. Oscar Arturo Bringas López
 institute: "UNAM"
 site: bookdown::bookdown_site
 documentclass: book
@@ -15,24 +15,31 @@ description: "Clases Muestreo"
 
 ## ¿Qué es y para qué sirve muestreo?
 
-El muestreo es el proceso de seleccionar un conjunto de individuos de una población con el fin de estudiarlos y poder caracterizar el total de la población. Nos ayuda a obtener información fiable de la población a partir de una muestra de la que extrae inferencias estadísticas con un margen de error medido en términos de probabilidades. En otras palabras, en una investigación por muestreo podremos estudiar el comportamiento y las opiniones de toda una población analizando únicamente una parte de esta, teniendo en cuenta que siempre existirá un margen de error a la hora de realizar dichos cálculos.
+El muestreo es el proceso de seleccionar un conjunto de individuos de una población con el fin de estudiarlos y poder caracterizar el total de la población. Nos ayuda a **obtener información fiable de la población a partir de una muestra** de la que extrae inferencias estadísticas con un margen de error medido en términos de probabilidades. En otras palabras, en una investigación por muestreo podremos estudiar el comportamiento y las opiniones de toda una población analizando únicamente una parte de esta, teniendo en cuenta que **siempre existirá un margen de error** a la hora de realizar dichos cálculos.
 
 ```{r, fig.align='center', out.height='450pt', out.width='450pt', echo=F}
 knitr::include_graphics("img/muestreo/1-1-1-muestreo.jpg")
 ```
 
 El aumento del uso de las técnicas de muestreo en la investigación es claro porque es un procedimiento
-que cuesta mucho menos dinero, consume menos tiempo y puede incluso ser más preciso que al realizar
-una enumeración completa, también llamada censo. Una muestra bien seleccionada de unos cuantos
+que **cuesta mucho menos dinero y consume menos tiempo**. Una muestra bien seleccionada de unos cuantos
 miles de individuos puede representar con gran precisión una población de millones.
+
+
+::: {.infobox .pin data-latex="{pin}"}
+**¡¡ RECORDAR !!**
+
+En comparación con un censo, una muestra bien diseñada puede lograr estimaciones de **alta calidad, en poco tiempo y a bajo costo** a costa de un **error de muestreo**, el cual puede ser **controlado.**
+:::
+
 
 ## Ventajas e importancia de utilizar muestreo en el mundo corporativo
 
 **Ventajas**
 
-* Reducción de costos: Los costos de un estudio serán menores si los datos de interés se pueden obtener a partir de una muestra de la población. Por ejemplo, cuando se realizan estudios de prevalencia de un evento de interés, es más económico medir una muestra representativa de 1500 sujetos de una población, que el total de individuos que la componen.
+* **Reducción de costos:** Los costos de un estudio serán menores si los datos de interés se pueden obtener a partir de una muestra de la población. Por ejemplo, cuando se realizan estudios de prevalencia de un evento de interés, es más económico medir una muestra representativa de 1500 sujetos de una población, que el total de individuos que la componen.
 
-* Eficiencia: Al trabajar con un número reducido de sujetos de estudio, representativos de la  población; el tiempo necesario para conducir el estudio y obtener resultados y conclusiones será notoriamente menor.
+* **Eficiencia:** Al trabajar con un número reducido de sujetos de estudio, representativos de la  población; el tiempo necesario para conducir el estudio y obtener resultados y conclusiones será notoriamente menor.
 
 **Importancia**
 
@@ -89,6 +96,8 @@ Para esto se necesitan definir los siguientes conceptos:
   
 * **Población objetivo:** Colección completa de todas las unidades que se quieren estudiar.
 
+* **Marco de muestreo:** Listado de elementos que pertenecen a la población objetivo y son elegibles en la muestra.
+
 * **Muestra:** Subconjunto de la población.
 
 * **Unidad de muestreo:** Objeto a ser seleccionado en la muestra que permitirá el acceso a
@@ -108,11 +117,11 @@ Una muestra puede ser obtenida de dos tipos: probabilística y no probabilístic
 
 ### Muestreo no probabilístico
 
-Utiliza métodos en que no interviene el azar, por lo que
+Utiliza métodos en que **no interviene el azar**, por lo que
 se desconoce la probabilidad asociada a cada individuo para formar parte de la muestra.
 Normalmente estos métodos se utilizan en estudios exploratorios o intencionales, en los cuales no es necesario proyectar los resultados.
 
-El inconveniente de este método es que no puede asegurarse la representatividad de la muestra.
+El inconveniente de este método es que **no puede asegurarse la representatividad de la muestra**.
 
 Los sistemas de muestreo no probabilísticos de clasifican de la siguiente manera: 
 
@@ -121,7 +130,7 @@ knitr::include_graphics("img/muestreo/1-1-4-tipos-de-muestreo-no-probabilistico.
 ```
 
 
-* **Muestreo por cuotas o cupos:** Si se conocen las características de la población a estudiar, se elegirán los individuos respetando siempre ciertas cuotas por edad, género, zona de residencia, entre otras que habrán sido prefijadas.
+* **Muestreo por cuotas o cupos:** Si se conocen las características de la población a estudiar, **se elegirán los individuos respetando ciertas cuotas por edad, género, zona de residencia, entre otras que habrán sido prefijadas**.
 Primero se realiza una clara división por cuotas (estratos) y posteriormente a cada cuota se aplica un muestreo discrecional.
 
 Ejemplo: Seleccionar 20 estudiantes de la carrera de ingeniería industrial, que ya hayan cursado el noveno semestre de la carrera y que tengan promedio arriba del 6.5. Se eligen a los primeros 20 que cumplan con estas condiciones.
@@ -131,7 +140,7 @@ Este tipo de muestreo se utiliza especialmente en las encuestas de opinión.
 knitr::include_graphics("img/muestreo/1-1-4-tipos-de-muestreo-no-probabilistico-cuotas.png")
 ```
 
-* **Muestreo por conveniencia:** Las muestras de la población se seleccionan solo porque están convenientemente disponibles para el investigador. Es la técnica de muestreo no probabilística más común, debido a su velocidad, costo-efectividad y facilidad de disponibilidad de la muestra.
+* **Muestreo por conveniencia:** Las muestras de la población se seleccionan solo porque **están convenientemente disponibles para el investigador**. Es la técnica de muestreo no probabilística más común, debido a su velocidad, costo-efectividad y facilidad de disponibilidad de la muestra.
 
 Ejemplo: Utilizar a estudiantes voluntarios que sean conocidos del investigador. El investigador puede enviar la encuesta a los estudiantes y ellos en este caso actuarían como muestra.
 
@@ -139,7 +148,7 @@ Ejemplo: Utilizar a estudiantes voluntarios que sean conocidos del investigador.
 knitr::include_graphics("img/muestreo/1-1-4-tipos-de-muestreo-no-probabilistico-conveniencia.png")
 ```
 
-* **Muestreo bola de nieve:** Se basa en referencias de sujetos iniciales para generar sujetos adicionales, de ahí deriva su nombre. Cuando se aplica este método de muestreo, los miembros del grupo de muestra se reclutan a través de una remisión en cadena. Estos pasos se repiten hasta que se encuentra el tamaño de muestra necesario. Éticamente, no se debe pedir a los participantes del estudio que identifiquen a otros participantes potenciales. Más bien, se les debe pedir que alienten a otros a que participen. 
+* **Muestreo bola de nieve:** Se basa en **referencias de sujetos iniciales para generar sujetos adicionales**, de ahí deriva su nombre. Cuando se aplica este método de muestreo, los miembros del grupo de muestra se reclutan a través de una remisión en cadena. Estos pasos se repiten hasta que se encuentra el tamaño de muestra necesario. Éticamente, no se debe pedir a los participantes del estudio que identifiquen a otros participantes potenciales. Más bien, se les debe pedir que alienten a otros a que participen. 
 
 Este muestreo consiste en dos partes: 
 
@@ -153,15 +162,23 @@ Ejemplo: Realizar estudios con poblaciones marginales, tipos de enfermos, especi
 knitr::include_graphics("img/muestreo/1-1-4-tipos-de-muestreo-no-probabilistico-bola-nieve.png")
 ```
 
-* **Muestreo discrecional:** La muestra es elegida a partir de un criterio profesional y puede basarse en la experiencia de investigaciones realizadas con anterioridad o en el conocimiento que el investigador tiene sobre la población. 
+* **Muestreo discrecional:** La muestra es elegida a partir de un **criterio profesional y puede basarse en la experiencia de investigaciones** realizadas con anterioridad o en el conocimiento que el investigador tiene sobre la población. 
 
 Es difícil estimar cuán cerca de la realidad se encuentra esta estimación. De hecho, la relevancia de los resultados depende de la experiencia del investigador.
 
-Ejemplo: se desea realizar una investigación sobre el comportamiento de los padres con sus hijos. Por lo tanto, el investigador selecciona como muestra a personas que tengan hijos, ya que las considera aptas de conocimiento para formar parte de la investigación.
+Ejemplo 1: se desea realizar una investigación sobre el comportamiento de los padres con sus hijos. Por lo tanto, el investigador selecciona como muestra a personas que tengan hijos, ya que las considera aptas de conocimiento para formar parte de la investigación.
+
+Ejemplo 2: Una prueba piloto podría realizarse a través de una muestra conformada por unidades de interés para el investigador que previamente sabe que puede poner a prueba el proceso de medición y los instrumentos de recolección de datos.
+
+:::: {.center .infobox .important data-latex="important"}
+¡¡¡ RECORDAR !!!
+
+Los diseños de muestra no probabilísticos **NO TIENEN REPRESENTATIVIDAD ESTADÍSTICA**, por lo que **los resultados no pueden generalizarse** al resto de la población.
+::::
 
 ### Muestreo probabilístico 
 
-El muestreo probabilístico se define como aquel en que todos los individuos de la población tienen una probabilidad de entrar a formar parte de la muestra. Los diseños en que interviene el azar producen muestras representativas la mayoría de las veces, aunque no garantizan la representatividad de la población que sometemos a estudio. 
+El muestreo probabilístico se define como aquél en que **todos los individuos de la población tienen una probabilidad de entrar a formar parte de la muestra**. Los diseños en que interviene el azar producen **muestras representativas** la mayoría de las veces. 
 
 Los sistemas de muestreo probabilísticos de clasifican de la siguiente manera: 
 
@@ -169,7 +186,7 @@ Los sistemas de muestreo probabilísticos de clasifican de la siguiente manera:
 knitr::include_graphics("img/muestreo/1-1-4-tipos-de-muestreo-probabilistico.jpg")
 ```
 
-* **Muestreo aleatorio simple:** Se caracteriza porque cada elemento de la población tiene la misma probabilidad  de  ser escogido para formar parte de la muestra. Una vez censado el marco de la población, se asigna un número a cada individuo o elemento y se elige aleatoriamente
+* **Muestreo aleatorio simple:** Se caracteriza porque **cada elemento de la población tiene la misma probabilidad  de  ser escogido para formar parte de la muestra** y todas las posibles muestras tienen la misma probabilidad de ser elegidas. Una vez censado el marco de la población, se asigna un número a cada individuo o elemento y se elige aleatoriamente.
 
 Para seleccionar una muestra de este tipo se requiere tener en forma de lista todos los elementos que integran la población investigada y utilizar tablas de números aleatorios. 
 
@@ -180,7 +197,7 @@ Ejemplo: A un grupo de 100 personas se les numera de uno a cien y se depositan e
 knitr::include_graphics("img/muestreo/1-1-4-tipos-de-muestreo-probabilistico-mas.png")
 ```
 
-* **Muestreo sistemático:** Es susceptible de ser más preciso que el muestreo aleatorio simple. Se elige un primer elemento del universo y luego se van escogiendo otros elementos igualmente espaciados a partir del primero. Consiste en dividir la población en $n$ estratos, compuestos de $k$ unidades. 
+* **Muestreo sistemático:** Es susceptible de ser más preciso que el muestreo aleatorio simple. Se elige un primer elemento del universo y luego se van escogiendo otros **elementos igualmente espaciados a partir del primero**. Consiste en dividir la población en $n$ estratos, compuestos de $k$ unidades. 
 
 Ejemplo: a partir de una lista de 100 establecimientos de comestibles, deseamos seleccionar una muestra probabilística de 25 tiendas. La forma de hacerlo sería: 
 
@@ -194,7 +211,7 @@ Ejemplo: a partir de una lista de 100 establecimientos de comestibles, deseamos 
 knitr::include_graphics("img/muestreo/1-1-4-tipos-de-muestreo-probabilistico-sistematico.jpg")
 ```
 
-* **Muestreo estratificado:** En este tipo de muestreo la población de estudio se divide en subgrupos o estratos, escogiendo posteriormente una muestra al azar de cada estrato. Esta división suele realizarse según una característica que pueda influir sobre los resultados del estudio.
+* **Muestreo estratificado:** En este tipo de muestreo **la población de estudio se divide en subgrupos o estratos**, escogiendo posteriormente una muestra al azar de cada estrato. Esta división suele realizarse según una característica que pueda influir sobre los resultados del estudio.
 
 Si la estratificación se realiza respecto una característica se denomina *muestreo estratificado simple*, y si se realiza respecto a dos o más características sedenomina *muestreo estratificado compuesto*.
 
@@ -204,11 +221,11 @@ Ejemplo: Si existen 5 millones de hipertensos en una población y hay un $35\%$ 
 knitr::include_graphics("img/muestreo/1-1-4-tipos-de-muestreo-probabilistico-estratificado.jpg")
 ```
 
-* **Muestreo por conglomerados:** El muestreo por conglomerados nos ayuda cuando es imposible o poco práctico crear un marco de muestreo de una población objetivo debido a que está muy dispersa geográficamente y el costo de la recopilación de datos es relativamente alto. Los elementos de la población son seleccionados al azar en forma natural por agrupaciones (clusters). Los elementos del muestreo se seleccionan de la población de manera individual, uno a la vez.  
+* **Muestreo por conglomerados:** El muestreo por conglomerados nos ayuda cuando es imposible o poco práctico crear un marco de muestreo de una población objetivo debido a que está muy **dispersa geográficamente** y el costo de la recopilación de datos es relativamente alto. Los elementos de la población son seleccionados al azar en forma natural por agrupaciones (clusters). Los elementos del muestreo se seleccionan de la población de manera individual, uno a la vez.  
 
 La heterogeneidad del grupo es fundamental para un buen diseño del muestreo por conglomerados. Por otra parte, los elementos dentro de cada grupo debe ser tan heterogéneos como la población objetivo
 
-Ejemplo: Una ONG quiere crear una muestra de niñas en 5 ciudades vecinas para obtener información sobre su nivel de educación.
+Ejemplo: Una ONG quiere crear una muestra de niños en edad escolar primaria en 5 ciudades vecinas para obtener información sobre su nivel de educación.
 
 ```{r, fig.align='center', out.height='250pt', out.width='450pt', echo=F}
 knitr::include_graphics("img/muestreo/1-1-4-tipos-de-muestreo-probabilistico-conglomerados.png")
