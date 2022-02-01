@@ -343,8 +343,10 @@ p = Proporción esperada (50% por default).
 
 $Z_{1-\alpha/2}$ = Percentil $\alpha/2$ de la distribución Normal estándar.
 
+e = Error de muestreo máximo a tolerar.
 
-En la medida en que se desea disminuir el error de muestreo, es necesario incrementar de manera exponencial el tamaño de muestra. Se presenta a continuación una gráfica que permite conocer el tamaño de muestra de acuerdo con el error de muestreo a tolerar.
+
+En la medida en que se desea disminuir el error de muestreo, es necesario incrementar de manera exponencial el tamaño de muestra. Se presenta a continuación una función creada con *R* (software estadístico) para conocer el tamaño de muestra de una población. Es necesario indicar los parámetros e hipótesis bajo los cuales se realizará dicho cálculo. Posteriormente, se presenta una gráfica que permite conocer el tamaño de muestra de acuerdo con el error de muestreo a tolerar (suponiendo fijos otros parámetros).
 
 ```{r}
 n_muestra <- function(e = 0.04, p = 0.5, alpha = 0.95, N = 100000){
@@ -402,7 +404,11 @@ tam_muestra %>%
 Se puede apreciar que a mayor tamaño de población es necesario una muestra más grande, sin embargo, no es un comportamiento lineal. Debido a que una de las condiciones de muestreo es que la selección es aleatoria, existe un punto de saturación de información, en donde no se necesita aumentar más el tamaño de muestra (aunque el tamaño de la población siga creciendo)
 
 
+::: {.infobox .important data-latex="{important}"}
+**¡¡ RECORDAR !!**
 
+Para lograr estimaciones representativas de ALTA calidad sobre la población, es indispensable realizar un buen diseño de muestreo, de lo contrario los resultados pueden estar sesgados.
+:::
 
 
 
